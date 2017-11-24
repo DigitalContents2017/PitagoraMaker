@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour {
 
-	// public static int Width = 
+	public static int WIDTH  = 40;
+	public static int HEIGHT = 20;
+
+	public static bool[,] stage;
+
 	void Start () {
-		
+		stage = new bool[WIDTH, HEIGHT];	
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
 	}

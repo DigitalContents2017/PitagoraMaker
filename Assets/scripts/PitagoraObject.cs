@@ -2,7 +2,14 @@
 
 public class PitagoraObject : MonoBehaviour
 {
-  const float GLID_SIZE = 0.5F;
+  const float GLID_SIZE = 1.0f;
+
+  int indexX, indexY;
+  Vector3 prevPos;
+
+  void OnMouseDown() {
+    prevPos = this.transform.localPosition;
+  }
 
   void OnMouseDrag()
   {
@@ -35,6 +42,20 @@ public class PitagoraObject : MonoBehaviour
       glidPos.y -= GLID_SIZE;
     }
 
-    transform.position = glidPos;
+    int _indexX = (int)glidPos.x;
+    int _indexY = (int)glidPos.y;
+
+    if(!StageManager.stage[_indexX, _indexY]) {
+      StageManager.stage[indexX, indexY] = false;
+      StageManager.stage[_indexX, _indexY] = true;
+
+      indexX = _indexX;
+      indexY = _indexY;
+      
+      transform.position = glidPos;
+    } else {
+      this.transform.localPosition = prevPos;
+    }
+   
   }
 }
