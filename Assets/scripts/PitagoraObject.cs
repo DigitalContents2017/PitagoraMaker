@@ -42,20 +42,15 @@ public class PitagoraObject : MonoBehaviour
       glidPos.y -= GLID_SIZE;
     }
 
-    int _indexX = (int)glidPos.x;
-    int _indexY = (int)glidPos.y;
+    var result = StageManager.SetObject(glidPos);
 
-    if(!StageManager.stage[_indexX, _indexY]) {
-      StageManager.stage[indexX, indexY] = false;
-      StageManager.stage[_indexX, _indexY] = true;
-
-      indexX = _indexX;
-      indexY = _indexY;
-      
+    if(result) {
+      StageManager.RemoveObject(prevPos);
       transform.position = glidPos;
+      prevPos = glidPos;
     } else {
       this.transform.localPosition = prevPos;
     }
-   
   }
+  
 }
