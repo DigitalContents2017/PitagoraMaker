@@ -9,12 +9,36 @@ public class StageManager : MonoBehaviour {
 
 	static bool[,] stage;
 
+	public Material lineMaterial;
+
 	void Start () {
-		stage = new bool[WIDTH, HEIGHT];	
+		stage = new bool[WIDTH, HEIGHT];
 	}
 	
 	void Update () {
 		
+	}
+
+	void OnRenderObject() {
+	    lineMaterial.SetPass(0);
+	    GL.PushMatrix();
+	    GL.MultMatrix(this.transform.localToWorldMatrix);
+
+	    for(int i = 0; i < WIDTH; i++) {
+	    	GL.Begin(GL.LINES);
+			GL.Vertex3(i - WIDTH / 2, -HEIGHT / 2, 0f);
+			GL.Vertex3(i - WIDTH / 2,  HEIGHT / 2, 0f);
+			GL.End();
+	    }
+
+    	for(int j = 0; j < HEIGHT; j++) {
+    		GL.Begin(GL.LINES);
+			GL.Vertex3(-WIDTH / 2, j - HEIGHT / 2, 0f);
+			GL.Vertex3( WIDTH / 2, j - HEIGHT / 2, 0f);
+			GL.End();
+    	}
+
+	    GL.PopMatrix();
 	}
 
 	public static bool SetObject(Vector2 pos) {
