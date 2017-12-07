@@ -2,6 +2,12 @@
 
 public class SimulationManager : MonoBehaviour {
   static bool isSimulating = false;
+  static SimulationButton simulationButton;
+
+  void Start()
+  {
+    simulationButton = GameObject.Find("SimulationButton").GetComponent<SimulationButton>();
+  }
 
   public static void SwitchSimulation() {
     if(isSimulating) {
@@ -15,11 +21,13 @@ public class SimulationManager : MonoBehaviour {
   {
     Debug.Log("start");
     isSimulating = true;
+    simulationButton.StartSimulation();
   }
 
   static void EndSimulation()
   {
     Debug.Log("end");
     isSimulating = false;
+    simulationButton.EndSimulation();
   }
 }
