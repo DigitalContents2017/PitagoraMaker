@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PitagoraObject : MonoBehaviour
 {
@@ -21,6 +22,13 @@ public class PitagoraObject : MonoBehaviour
 
   void OnMouseUp()
   {
+    if (IsTrashed())
+    {
+      StageManager.RemoveObject(prevPos);
+      Destroy(gameObject);
+      return;
+    }
+
     Vector3 glidPos = GetFitGlidPos();
     var result = StageManager.SetObject(glidPos);
 
@@ -57,5 +65,18 @@ public class PitagoraObject : MonoBehaviour
 
     return glidPos;
   }
-  
+
+  bool IsTrashed() {
+    GameObject trash = GameObject.Find("Trash");
+    Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+    Vector3 trashScreenPos = Camera.main.WorldToScreenPoint(trash.transform.position);
+    Vector3 mouseScreenPos = Input.mousePosition;
+    float width = trash.GetComponent<RectTransform>().rect.width * canvas.scaleFactor;
+    float height = trash.GetComponent<RectTransform>().rect.height * canvas.scaleFactor;
+    if(Math.Abs(trashScreenPos.x - mouseScreenPos.x) < width / 2 &&
+       Math.Abs(trashScreenPos.y - mouseScreenPos.y) < height / 2) {
+      return true;
+    }
+    return false;
+  }
 }
