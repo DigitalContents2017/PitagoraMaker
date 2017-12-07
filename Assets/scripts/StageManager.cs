@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour {
 
+	public GameObject pitagoraObjectRoot;
+
 	public static int WIDTH  = 40;
 	public static int HEIGHT = 20;
 
 	static bool[,] stage;
 
 	void Start () {
-		stage = new bool[WIDTH, HEIGHT];	
+		stage = new bool[WIDTH, HEIGHT];
 	}
 	
 	void Update () {
 		
+	}
+
+	public GameObject Instantiate(GameObject pObject, Vector3 pos) {
+		var childObject = (GameObject)Instantiate(pObject, pos, Quaternion.identity);
+		childObject.transform.parent = pitagoraObjectRoot.transform;
+		return childObject;
 	}
 
 	public static bool SetObject(Vector2 pos) {

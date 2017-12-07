@@ -26,7 +26,7 @@ public class SimulationManager : MonoBehaviour {
     Vector2 startPos = new Vector2(-15, 5);
     isSimulating = true;
     simulationButton.StartSimulation();
-    ballObject = Instantiate(ballPrefab, startPos, Quaternion.identity);
+    ballObject = Manager.stageManager.Instantiate(ballPrefab, startPos);
   }
 
   static void EndSimulation()
