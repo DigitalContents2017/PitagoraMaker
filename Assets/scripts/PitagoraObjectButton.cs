@@ -17,7 +17,6 @@ public class PitagoraObjectButton : MonoBehaviour, IPointerDownHandler
 
   void CreateObject()
   {
-    Vector3 position = transform.position;
-    Instantiate(PitagoraObject, position, Quaternion.identity);
+    Manager.stageManager.Instantiate(PitagoraObject, this.transform.position);
   }
 }
