@@ -21,6 +21,19 @@ public class PitagoraObject : MonoBehaviour
 
   void OnMouseUp()
   {
+    Vector3 glidPos = GetFitGlidPos();
+    var result = StageManager.SetObject(glidPos);
+
+    if(result) {
+      StageManager.RemoveObject(prevPos);
+      transform.position = glidPos;
+      prevPos = glidPos;
+    } else {
+      this.transform.localPosition = prevPos;
+    }
+  }
+
+  Vector3 GetFitGlidPos() {
     Vector3 diff = new Vector3(transform.position.x % GLID_SIZE, transform.position.y % GLID_SIZE, 0);
     Vector3 glidPos = new Vector3(transform.position.x - diff.x, transform.position.y - diff.y, 0);
 
@@ -42,15 +55,7 @@ public class PitagoraObject : MonoBehaviour
       glidPos.y -= GLID_SIZE;
     }
 
-    var result = StageManager.SetObject(glidPos);
-
-    if(result) {
-      StageManager.RemoveObject(prevPos);
-      transform.position = glidPos;
-      prevPos = glidPos;
-    } else {
-      this.transform.localPosition = prevPos;
-    }
+    return glidPos;
   }
   
 }
