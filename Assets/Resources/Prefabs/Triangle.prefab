@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4113028734513404}
   - component: {fileID: 212443624963190742}
-  - component: {fileID: 61172700033900288}
   - component: {fileID: 114174685985221822}
   - component: {fileID: 114321848233185472}
+  - component: {fileID: 60808732581691432}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -43,8 +43,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61172700033900288
-BoxCollider2D:
+--- !u!60 &60808732581691432
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -65,9 +65,13 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5, y: 0.5}
+      - {x: -0.5, y: -0.5}
+      - {x: 0.5, y: -0.5}
+      - {x: 0.5, y: -0.45999998}
+      - {x: -0.45999998, y: 0.5}
 --- !u!114 &114174685985221822
 MonoBehaviour:
   m_ObjectHideFlags: 1
