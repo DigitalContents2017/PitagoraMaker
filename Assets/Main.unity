@@ -364,7 +364,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 655383691}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -799.7602, y: -456.1151, z: 0}
+  m_LocalPosition: {x: -800, y: -456.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2016994509}
@@ -584,7 +584,7 @@ RectTransform:
   m_GameObject: {fileID: 988673967}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -5}
-  m_LocalScale: {x: 0.019758351, y: 0.019758351, z: 0.019758351}
+  m_LocalScale: {x: 0.019753085, y: 0.019753085, z: 0.019753085}
   m_Children:
   - {fileID: 1377827916}
   - {fileID: 10162451}
@@ -622,7 +622,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1150254580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 829.7602, y: -436.1151, z: 0}
+  m_LocalPosition: {x: 830, y: -436.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 988673971}
@@ -770,7 +770,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1377827915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 456.1151, z: 0}
+  m_LocalPosition: {x: 0, y: 456.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 393678842}
@@ -904,14 +904,20 @@ Prefab:
     - target: {fileID: 61867498396671364, guid: 664ee0ad2bd6049f499cf56600d625f4,
         type: 2}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 61867498396671364, guid: 664ee0ad2bd6049f499cf56600d625f4,
         type: 2}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 61867498396671364, guid: 664ee0ad2bd6049f499cf56600d625f4,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 664ee0ad2bd6049f499cf56600d625f4, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1984429116 stripped
