@@ -1,8 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class PitagoraObject : MonoBehaviour
-{
+class Block : PitagoraObject {
   const float GLID_SIZE = 1.0f;
 
   int indexX, indexY;
