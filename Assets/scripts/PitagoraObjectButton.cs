@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 public class PitagoraObjectButton : MonoBehaviour, IPointerDownHandler
 {
   public GameObject PitagoraObject;
+  public float rotate;
 
   void Start()
   {
@@ -17,6 +18,7 @@ public class PitagoraObjectButton : MonoBehaviour, IPointerDownHandler
 
   void CreateObject()
   {
-    Manager.stageManager.Instantiate(PitagoraObject, this.transform.position);
+    Quaternion quatarnion = Quaternion.Euler(0, 0, rotate);
+    Manager.stageManager.PitagoraInstantiate(PitagoraObject, this.transform.position, quatarnion);
   }
 }
