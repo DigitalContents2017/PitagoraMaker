@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b24ffe56a8d8460abc809a457706f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PitagoraObject: {fileID: 1592492118918358, guid: 231e2e2d8f2bc4fd1bf2c3ac1079ba43,
+  PitagoraObject: {fileID: 1592492118918358, guid: 29b3ea29ace95405e88ec7e00e28f99a,
     type: 2}
   rotate: 270
 --- !u!114 &18026527
@@ -1129,7 +1129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b24ffe56a8d8460abc809a457706f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PitagoraObject: {fileID: 1592492118918358, guid: 231e2e2d8f2bc4fd1bf2c3ac1079ba43,
+  PitagoraObject: {fileID: 1592492118918358, guid: 29b3ea29ace95405e88ec7e00e28f99a,
     type: 2}
   rotate: 90
 --- !u!114 &1289715795
@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b24ffe56a8d8460abc809a457706f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PitagoraObject: {fileID: 1592492118918358, guid: 231e2e2d8f2bc4fd1bf2c3ac1079ba43,
+  PitagoraObject: {fileID: 1592492118918358, guid: 29b3ea29ace95405e88ec7e00e28f99a,
     type: 2}
   rotate: 0
 --- !u!114 &1981649045
@@ -1562,7 +1562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b24ffe56a8d8460abc809a457706f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PitagoraObject: {fileID: 1592492118918358, guid: 231e2e2d8f2bc4fd1bf2c3ac1079ba43,
+  PitagoraObject: {fileID: 1592492118918358, guid: 29b3ea29ace95405e88ec7e00e28f99a,
     type: 2}
   rotate: 180
 --- !u!114 &2001046169
