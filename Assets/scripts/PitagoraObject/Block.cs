@@ -3,6 +3,7 @@ using UnityEngine;
 
 class Block : PitagoraObject {
   const float GLID_SIZE = 1.0f;
+  bool isSimulating = false;
 
   int indexX, indexY;
   Vector3 prevPos;
@@ -12,12 +13,25 @@ class Block : PitagoraObject {
     prevPos = this.transform.localPosition;
   }
 
+  public override void StartSimulation() {
+    base.StartSimulation();
+    isSimulating = true;
+  }
+
+  public override void EndSimulation()
+  {
+    base.EndSimulation();
+    isSimulating = false;
+  }
+
   void OnMouseDrag()
   {
-    Vector3 screenPos = Input.mousePosition;
-    Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-    worldPos.z = 0;
-    transform.position = worldPos;
+    if (!isSimulating) {
+      Vector3 screenPos = Input.mousePosition;
+      Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+      worldPos.z = 0;
+      transform.position = worldPos;
+    }
   }
 
   void OnMouseUp()
