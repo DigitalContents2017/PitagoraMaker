@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4113028734513404}
   - component: {fileID: 212443624963190742}
-  - component: {fileID: 114174685985221822}
   - component: {fileID: 114321848233185472}
   - component: {fileID: 60808732581691432}
   m_Layer: 0
@@ -72,17 +71,6 @@ PolygonCollider2D:
       - {x: 0.5, y: -0.5}
       - {x: 0.5, y: -0.45999998}
       - {x: -0.45999998, y: 0.5}
---- !u!114 &114174685985221822
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1592492118918358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46a79e3e6f5dd48bf8ade1ed6159489b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114321848233185472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2763986660bfb48bd91e93a1787b6ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isButton: 0
 --- !u!212 &212443624963190742
 SpriteRenderer:
   m_ObjectHideFlags: 1
