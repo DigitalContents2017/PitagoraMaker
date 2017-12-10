@@ -13,8 +13,10 @@ class RigidBlock : Block
 
   public override void StartSimulation()
   {
-    Debug.Log("RigidStart");
-    rigidbody.constraints = RigidbodyConstraints2D.None;
+    if(!isButton)
+    {
+      rigidbody.constraints = RigidbodyConstraints2D.None;
+    }
   }
 
   public override void EndSimulation()

@@ -6,6 +6,7 @@ class Block : PitagoraObject {
 
   int indexX, indexY;
   Vector3 prevPos;
+  public bool isButton = false; //tureならUI上のボタン
 
   void OnMouseDown() {
     prevPos = this.transform.localPosition;
@@ -30,6 +31,7 @@ class Block : PitagoraObject {
 
     Vector3 glidPos = GetFitGlidPos();
     var result = StageManager.SetObject(glidPos);
+    isButton = false;
 
     if(result) {
       StageManager.RemoveObject(prevPos);
