@@ -15,6 +15,7 @@ class RigidBlock : Block
 
   public override void StartSimulation()
   {
+    base.StartSimulation();
     savedPosition = new Vector2(transform.position.x, transform.position.y);
     savedRotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
 
@@ -26,6 +27,7 @@ class RigidBlock : Block
 
   public override void EndSimulation()
   {
+    base.EndSimulation();
     rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
     transform.position = savedPosition;
     transform.rotation = savedRotation;
