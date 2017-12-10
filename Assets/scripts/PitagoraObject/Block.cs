@@ -7,10 +7,17 @@ class Block : PitagoraObject {
 
   int indexX, indexY;
   Vector3 prevPos;
+  Quaternion prevRotation;
   public bool isButton = false; //tureならUI上のボタン
+
+  protected void Start() {
+    prevPos = this.transform.localPosition;
+    prevRotation = this.transform.rotation;
+  }
 
   void OnMouseDown() {
     prevPos = this.transform.localPosition;
+    prevRotation = this.transform.rotation;
   }
 
   public override void StartSimulation() {
@@ -22,6 +29,8 @@ class Block : PitagoraObject {
   {
     base.EndSimulation();
     isSimulating = false;
+    this.transform.localPosition = prevPos;
+    this.transform.rotation = prevRotation;
   }
 
   void OnMouseDrag()
@@ -53,6 +62,7 @@ class Block : PitagoraObject {
       prevPos = glidPos;
     } else {
       this.transform.localPosition = prevPos;
+      this.transform.rotation = prevRotation;
     }
   }
 

@@ -4,11 +4,10 @@ using System.Collections;
 class RigidBlock : Block
 {
   Rigidbody2D rigidbody;
-  Vector2 savedPosition;
-  Quaternion savedRotation;
 
 	void Start()
 	{
+    base.Start();
     rigidbody = GetComponent<Rigidbody2D>();
     rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
 	}
@@ -16,9 +15,6 @@ class RigidBlock : Block
   public override void StartSimulation()
   {
     base.StartSimulation();
-    savedPosition = new Vector2(transform.position.x, transform.position.y);
-    savedRotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
-
     if(!isButton)
     {
       rigidbody.constraints = RigidbodyConstraints2D.None;
@@ -29,7 +25,5 @@ class RigidBlock : Block
   {
     base.EndSimulation();
     rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-    transform.position = savedPosition;
-    transform.rotation = savedRotation;
   }
 }
