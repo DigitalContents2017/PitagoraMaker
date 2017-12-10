@@ -5,7 +5,7 @@ class Manager : MonoBehaviour
 {
 	public static StageManager stageManager;
 
-	void Start() {
+  void Awake() {
 		stageManager = this.transform.Find("StageManager").GetComponent<StageManager>();
 	}
 }
