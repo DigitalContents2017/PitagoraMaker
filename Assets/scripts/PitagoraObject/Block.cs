@@ -9,10 +9,16 @@ class Block : PitagoraObject {
   Vector3 prevPos;
   Quaternion prevRotation;
   public bool isButton = false; //tureならUI上のボタン
+  Collider2D ObjectCollider;
+  BoxCollider2D BoxCollider;
 
   protected void Start() {
     prevPos = this.transform.localPosition;
     prevRotation = this.transform.rotation;
+    ObjectCollider = GetComponent<Collider2D>();
+    ObjectCollider.enabled = false;
+    BoxCollider = gameObject.AddComponent<BoxCollider2D>();
+    BoxCollider.size = new Vector2(1, 1);
   }
 
   void OnMouseDown() {
@@ -23,6 +29,8 @@ class Block : PitagoraObject {
   public override void StartSimulation() {
     base.StartSimulation();
     isSimulating = true;
+    ObjectCollider.enabled = true;
+    BoxCollider.enabled = false;
   }
 
   public override void EndSimulation()
@@ -31,6 +39,8 @@ class Block : PitagoraObject {
     isSimulating = false;
     this.transform.localPosition = prevPos;
     this.transform.rotation = prevRotation;
+    ObjectCollider.enabled = false;
+    BoxCollider.enabled = true;
   }
 
   void OnMouseDrag()
