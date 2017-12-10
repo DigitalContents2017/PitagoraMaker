@@ -45,24 +45,30 @@ class Block : PitagoraObject {
 
   void OnMouseUp()
   {
-    if (IsTrashed())
+    if (!isSimulating)
     {
-      StageManager.RemoveObject(prevPos);
-      Destroy(gameObject);
-      return;
-    }
+      if (IsTrashed())
+      {
+        StageManager.RemoveObject(prevPos);
+        Destroy(gameObject);
+        return;
+      }
 
-    Vector3 glidPos = GetFitGlidPos();
-    var result = StageManager.SetObject(glidPos);
-    isButton = false;
+      Vector3 glidPos = GetFitGlidPos();
+      var result = StageManager.SetObject(glidPos);
+      isButton = false;
 
-    if(result) {
-      StageManager.RemoveObject(prevPos);
-      transform.position = glidPos;
-      prevPos = glidPos;
-    } else {
-      this.transform.localPosition = prevPos;
-      this.transform.rotation = prevRotation;
+      if (result)
+      {
+        StageManager.RemoveObject(prevPos);
+        transform.position = glidPos;
+        prevPos = glidPos;
+      }
+      else
+      {
+        this.transform.localPosition = prevPos;
+        this.transform.rotation = prevRotation;
+      }
     }
   }
 
