@@ -19,6 +19,7 @@ public class PitagoraObjectButton : MonoBehaviour, IPointerDownHandler
   void CreateObject()
   {
     Quaternion quatarnion = Quaternion.Euler(0, 0, rotate);
-    Manager.stageManager.PitagoraInstantiate(PitagoraObject, this.transform.position, quatarnion);
+    GameObject block = Manager.stageManager.PitagoraInstantiate(PitagoraObject, this.transform.position, quatarnion);
+    block.GetComponent<Block>().isButton = true;
   }
 }

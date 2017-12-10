@@ -19,10 +19,6 @@ public class StageManager : MonoBehaviour {
 		
 	}
 
-  public GameObject PitagoraInstantiate(GameObject pObject, Vector3 pos) {
-    return Instantiate(pObject, pos, Quaternion.identity);
-  }
-
   public GameObject PitagoraInstantiate(GameObject pObject, Vector3 pos, Quaternion quatarnion) {
     var childObject = (GameObject)Instantiate(pObject, pos, quatarnion);
 		childObject.transform.parent = pitagoraObjectRoot.transform;
