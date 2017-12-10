@@ -4,12 +4,14 @@ public class SimulationManager : MonoBehaviour {
   static bool isSimulating = false;
   static SimulationButton simulationButton;
   static GameObject ballPrefab;
+  static GameObject pitagoraObjects;
   static Object ballObject;
 
   void Start()
   {
     simulationButton = GameObject.Find("SimulationButton").GetComponent<SimulationButton>();
     ballPrefab = (GameObject)Resources.Load("Prefabs/Ball");
+    pitagoraObjects = GameObject.Find("PitagoraObjects");
   }
 
   public static void SwitchSimulation() {
@@ -27,6 +29,12 @@ public class SimulationManager : MonoBehaviour {
     isSimulating = true;
     simulationButton.StartSimulation();
     ballObject = Manager.stageManager.PitagoraInstantiate(ballPrefab, startPos);
+
+    var childTransform = pitagoraObjects.GetComponentsInChildren<PitagoraObject>();
+    foreach (var child in childTransform)
+    {
+      child.StartSimulation();
+    }
   }
 
   static void EndSimulation()
@@ -35,5 +43,11 @@ public class SimulationManager : MonoBehaviour {
     isSimulating = false;
     simulationButton.EndSimulation();
     Destroy(ballObject);
+
+    var childTransform = pitagoraObjects.GetComponentsInChildren<PitagoraObject>();
+    foreach (var child in childTransform)
+    {
+      child.EndSimulation();
+    }
   }
 }
