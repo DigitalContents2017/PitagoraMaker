@@ -16,7 +16,10 @@ class Block : PitagoraObject {
     prevPos = this.transform.localPosition;
     prevRotation = this.transform.rotation;
     ObjectCollider = GetComponent<Collider2D>();
-    ObjectCollider.enabled = false;
+    if (ObjectCollider != null)
+    {
+      ObjectCollider.enabled = false;
+    }
     BoxCollider = gameObject.AddComponent<BoxCollider2D>();
     BoxCollider.size = new Vector2(1, 1);
   }
@@ -29,7 +32,10 @@ class Block : PitagoraObject {
   public override void StartSimulation() {
     base.StartSimulation();
     isSimulating = true;
-    ObjectCollider.enabled = true;
+    if (ObjectCollider != null)
+    {
+      ObjectCollider.enabled = true;
+    }
     BoxCollider.enabled = false;
   }
 
@@ -39,7 +45,10 @@ class Block : PitagoraObject {
     isSimulating = false;
     this.transform.localPosition = prevPos;
     this.transform.rotation = prevRotation;
-    ObjectCollider.enabled = false;
+    if (ObjectCollider != null)
+    {
+      ObjectCollider.enabled = false;
+    }
     BoxCollider.enabled = true;
   }
 
