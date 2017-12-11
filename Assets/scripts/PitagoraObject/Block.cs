@@ -6,11 +6,27 @@ class Block : PitagoraObject {
   bool isSimulating = false;
 
   int indexX, indexY;
+  bool isButton = false; //tureならUI上のボタン
   Vector3 prevPos;
   Quaternion prevRotation;
-  public bool isButton = false; //tureならUI上のボタン
   Collider2D ObjectCollider;
   BoxCollider2D BoxCollider;
+
+  public bool IsButton
+  {
+    set
+    {
+      isButton = value;
+      foreach (Transform child in transform)
+      {
+        child.GetComponent<ChildBlock>().isFreeze = value;
+      }
+    }
+    get
+    {
+      return isButton;
+    }
+  }
 
   protected void Start() {
     prevPos = this.transform.localPosition;
@@ -75,7 +91,7 @@ class Block : PitagoraObject {
 
       Vector3 glidPos = GetFitGlidPos();
       var result = StageManager.SetObject(glidPos);
-      isButton = false;
+      IsButton = false;
 
       if (result)
       {
