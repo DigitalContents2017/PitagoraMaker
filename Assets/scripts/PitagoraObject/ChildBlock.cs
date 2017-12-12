@@ -3,7 +3,6 @@ using UnityEngine;
 
 class ChildBlock : PitagoraObject
 {
-	Vector2 prevPos;
 	Quaternion prevRotation;
 	Collider2D ObjectCollider;
 	public bool isFreeze = false;
