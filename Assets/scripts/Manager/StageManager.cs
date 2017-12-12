@@ -14,33 +14,33 @@ public class StageManager : MonoBehaviour {
 	void Start () {
 		stage = new bool[WIDTH, HEIGHT];
 	}
-	
+
 	void Update () {
 		
 	}
 
 	public PitagoraObject PitagoraInstantiate(GameObject pObject, Vector3 pos, Quaternion quatarnion) {
-    	var childObject = (GameObject)Instantiate(pObject, pos, quatarnion);
+		var childObject = (GameObject)Instantiate(pObject, pos, quatarnion);
 		childObject.transform.parent = pitagoraObjectRoot.transform;
 		return childObject.GetComponent<PitagoraObject>();
 	}
 
 	public static bool SetObject(Vector2 pos) {
-   		int _indexX = (int)pos.x + WIDTH / 2;
-    	int _indexY = (int)pos.y + HEIGHT / 2;
+		int _indexX = (int)pos.x + WIDTH / 2;
+		int _indexY = (int)pos.y + HEIGHT / 2;
 
-    	if(StageManager.stage[_indexX, _indexY]) {
-    		return false;
-    	}
+		if(StageManager.stage[_indexX, _indexY]) {
+			return false;
+		}
 
-    	StageManager.stage[_indexX, _indexY] = true;
-    	return true;
+		StageManager.stage[_indexX, _indexY] = true;
+		return true;
 	}
 
 	public static void RemoveObject(Vector2 pos) {
 		int _indexX = (int)pos.x + WIDTH / 2;
-    	int _indexY = (int)pos.y + HEIGHT / 2;
+		int _indexY = (int)pos.y + HEIGHT / 2;
 
-    	StageManager.stage[_indexX, _indexY] = false;
+		StageManager.stage[_indexX, _indexY] = false;
 	}
 }
