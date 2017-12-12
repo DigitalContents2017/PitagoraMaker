@@ -6,27 +6,11 @@ class Block : PitagoraObject {
   bool isSimulating = false;
 
   int indexX, indexY;
-  bool isButton = false; //tureならUI上のボタン
+
   Vector3 prevPos;
   Quaternion prevRotation;
   Collider2D ObjectCollider;
   BoxCollider2D BoxCollider;
-
-  public bool IsButton
-  {
-    set
-    {
-      isButton = value;
-      foreach (Transform child in transform)
-      {
-        child.GetComponent<ChildBlock>().isFreeze = value;
-      }
-    }
-    get
-    {
-      return isButton;
-    }
-  }
 
   protected void Start() {
     prevPos = this.transform.localPosition;
@@ -38,11 +22,6 @@ class Block : PitagoraObject {
     }
     BoxCollider = gameObject.AddComponent<BoxCollider2D>();
     BoxCollider.size = new Vector2(1, 1);
-  }
-
-  void OnMouseDown() {
-    prevPos = this.transform.localPosition;
-    prevRotation = this.transform.rotation;
   }
 
   public override void StartSimulation() {
@@ -68,43 +47,41 @@ class Block : PitagoraObject {
     BoxCollider.enabled = true;
   }
 
-  void OnMouseDrag()
-  {
-    if (!isSimulating) {
-      Vector3 screenPos = Input.mousePosition;
-      Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-      worldPos.z = 0;
-      transform.position = worldPos;
-    }
+  void OnMouseDown() {
+    base.IsHold = true;
   }
 
-  void OnMouseUp()
-  {
-    if (!isSimulating)
-    {
-      if (IsTrashed())
-      {
-        StageManager.RemoveObject(prevPos);
-        Destroy(gameObject);
-        return;
-      }
+  void OnMouseDrag() {
 
-      Vector3 glidPos = GetFitGlidPos();
-      var result = StageManager.SetObject(glidPos);
-      IsButton = false;
+  }
 
-      if (result)
-      {
-        StageManager.RemoveObject(prevPos);
-        transform.position = glidPos;
-        prevPos = glidPos;
-      }
-      else
-      {
-        this.transform.localPosition = prevPos;
-        this.transform.rotation = prevRotation;
-      }
-    }
+  void OnMouseUp() {
+    base.IsHold = false;
+
+    // if (!isSimulating)
+    // {
+    //   if (IsTrashed())
+    //   {
+    //     StageManager.RemoveObject(prevPos);
+    //     Destroy(gameObject);
+    //     return;
+    //   }
+
+    //   Vector3 glidPos = GetFitGlidPos();
+    //   var result = StageManager.SetObject(glidPos);
+
+    //   if (result)
+    //   {
+    //     StageManager.RemoveObject(prevPos);
+    //     transform.position = glidPos;
+    //     prevPos = glidPos;
+    //   }
+    //   else
+    //   {
+    //     this.transform.localPosition = prevPos;
+    //     this.transform.rotation = prevRotation;
+    //   }
+    // }
   }
 
   Vector3 GetFitGlidPos() {
