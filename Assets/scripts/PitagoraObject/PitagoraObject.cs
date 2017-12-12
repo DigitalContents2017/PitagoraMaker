@@ -4,20 +4,26 @@ using UnityEngine;
 public class PitagoraObject : MonoBehaviour {
 
 	public Quaternion rotation;
+	public bool IsStatic = false;
 
-	Vector3 prevPos;
+	protected Vector3 prevPos;
 
 	bool isHold = false;
 	public bool IsHold {
 		get { return isHold; }
 		set {
-			if(!isHold && value) {
-				OnObjectHold();
-			} else if(isHold && !value) {
-				OnObjectRelease();
-			}
+			if(!IsStatic) {
+				if(!isHold && value) {
+					OnObjectHold();
+				} else if(isHold && !value) {
+					OnObjectRelease();
+				}
 
-			isHold = value;
+				isHold = value;
+			} else {
+				// StaticオブジェクトならHoldできない
+				isHold = false;
+			}
 		}
 	}
 
@@ -35,28 +41,12 @@ public class PitagoraObject : MonoBehaviour {
 		}
 	}
 
-	void OnObjectHold() {
+	protected virtual void OnObjectHold() {
 		prevPos = this.transform.localPosition;
 	}
 
-	void OnObjectRelease() {
-		// if (IsTrashed()) {
-	 //        StageManager.RemoveObject(prevPos);
-	 //        Destroy(gameObject);
-	 //        return;
-  //     	}
+	protected virtual void OnObjectRelease() {
 
-  //     	Vector3 glidPos = GetFitGlidPos();
-  //     	var result = StageManager.SetObject(glidPos);
-
-		// if (result) {
-	 //        StageManager.RemoveObject(prevPos);
-	 //        transform.position = glidPos;
-	 //        prevPos = glidPos;
-  //     	} else {
-  //     		this.transform.localPosition = prevPos;
-  //     		this.transform.rotation = prevRotation;
-  //     	}
 	}
 
 	public virtual void StartSimulation() {}

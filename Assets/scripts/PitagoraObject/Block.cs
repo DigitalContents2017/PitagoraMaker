@@ -7,14 +7,11 @@ class Block : PitagoraObject {
 
   int indexX, indexY;
 
-  Vector3 prevPos;
-  Quaternion prevRotation;
   Collider2D ObjectCollider;
   BoxCollider2D BoxCollider;
 
   protected void Start() {
     prevPos = this.transform.localPosition;
-    prevRotation = this.transform.rotation;
     ObjectCollider = GetComponent<Collider2D>();
     if (ObjectCollider != null)
     {
@@ -39,7 +36,7 @@ class Block : PitagoraObject {
     base.EndSimulation();
     isSimulating = false;
     this.transform.localPosition = prevPos;
-    this.transform.rotation = prevRotation;
+    this.transform.rotation = rotation;
     if (ObjectCollider != null)
     {
       ObjectCollider.enabled = false;
@@ -57,31 +54,35 @@ class Block : PitagoraObject {
 
   void OnMouseUp() {
     base.IsHold = false;
+  }
 
-    // if (!isSimulating)
-    // {
-    //   if (IsTrashed())
-    //   {
-    //     StageManager.RemoveObject(prevPos);
-    //     Destroy(gameObject);
-    //     return;
-    //   }
+  protected override void OnObjectRelease() {
+    base.OnObjectRelease();
 
-    //   Vector3 glidPos = GetFitGlidPos();
-    //   var result = StageManager.SetObject(glidPos);
+    if (!isSimulating)
+    {
+      if (IsTrashed())
+      {
+        StageManager.RemoveObject(prevPos);
+        Destroy(gameObject);
+        return;
+      }
 
-    //   if (result)
-    //   {
-    //     StageManager.RemoveObject(prevPos);
-    //     transform.position = glidPos;
-    //     prevPos = glidPos;
-    //   }
-    //   else
-    //   {
-    //     this.transform.localPosition = prevPos;
-    //     this.transform.rotation = prevRotation;
-    //   }
-    // }
+      Vector3 glidPos = GetFitGlidPos();
+      var result = StageManager.SetObject(glidPos);
+
+      if (result)
+      {
+        StageManager.RemoveObject(prevPos);
+        transform.position = glidPos;
+        prevPos = glidPos;
+      }
+      else
+      {
+        this.transform.localPosition = prevPos;
+        this.transform.rotation = rotation;
+      }
+    }
   }
 
   Vector3 GetFitGlidPos() {
