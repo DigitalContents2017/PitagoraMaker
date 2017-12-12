@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PitagoraObjectButton : MonoBehaviour, IPointerDownHandler
-{
+public class PitagoraObjectButton : MonoBehaviour, IPointerDownHandler {
   public GameObject PitagoraObject;
   public float rotate;
 
   void Start()
   {
-    CreateObject();
+    // CreateObject();
   }
 
   public void OnPointerDown (PointerEventData eventData)
@@ -19,7 +18,7 @@ public class PitagoraObjectButton : MonoBehaviour, IPointerDownHandler
   void CreateObject()
   {
     Quaternion quatarnion = Quaternion.Euler(0, 0, rotate);
-    GameObject block = Manager.stageManager.PitagoraInstantiate(PitagoraObject, this.transform.position, quatarnion);
-    block.GetComponent<Block>().IsButton = true;
+    var pitagoraObject = Manager.stageManager.PitagoraInstantiate(PitagoraObject, this.transform.position, quatarnion);
+    pitagoraObject.IsHold = true;
   }
 }

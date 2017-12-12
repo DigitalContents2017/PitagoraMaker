@@ -6,31 +6,12 @@ class Block : PitagoraObject {
   bool isSimulating = false;
 
   int indexX, indexY;
-  bool isButton = false; //tureならUI上のボタン
-  Vector3 prevPos;
-  Quaternion prevRotation;
+
   Collider2D ObjectCollider;
   BoxCollider2D BoxCollider;
 
-  public bool IsButton
-  {
-    set
-    {
-      isButton = value;
-      foreach (Transform child in transform)
-      {
-        child.GetComponent<ChildBlock>().isFreeze = value;
-      }
-    }
-    get
-    {
-      return isButton;
-    }
-  }
-
   protected void Start() {
     prevPos = this.transform.localPosition;
-    prevRotation = this.transform.rotation;
     ObjectCollider = GetComponent<Collider2D>();
     if (ObjectCollider != null)
     {
@@ -38,11 +19,6 @@ class Block : PitagoraObject {
     }
     BoxCollider = gameObject.AddComponent<BoxCollider2D>();
     BoxCollider.size = new Vector2(1, 1);
-  }
-
-  void OnMouseDown() {
-    prevPos = this.transform.localPosition;
-    prevRotation = this.transform.rotation;
   }
 
   public override void StartSimulation() {
@@ -60,7 +36,7 @@ class Block : PitagoraObject {
     base.EndSimulation();
     isSimulating = false;
     this.transform.localPosition = prevPos;
-    this.transform.rotation = prevRotation;
+    this.transform.rotation = rotation;
     if (ObjectCollider != null)
     {
       ObjectCollider.enabled = false;
@@ -68,18 +44,21 @@ class Block : PitagoraObject {
     BoxCollider.enabled = true;
   }
 
-  void OnMouseDrag()
-  {
-    if (!isSimulating) {
-      Vector3 screenPos = Input.mousePosition;
-      Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-      worldPos.z = 0;
-      transform.position = worldPos;
-    }
+  void OnMouseDown() {
+    base.IsHold = true;
   }
 
-  void OnMouseUp()
-  {
+  void OnMouseDrag() {
+
+  }
+
+  void OnMouseUp() {
+    base.IsHold = false;
+  }
+
+  protected override void OnObjectRelease() {
+    base.OnObjectRelease();
+
     if (!isSimulating)
     {
       if (IsTrashed())
@@ -91,7 +70,6 @@ class Block : PitagoraObject {
 
       Vector3 glidPos = GetFitGlidPos();
       var result = StageManager.SetObject(glidPos);
-      IsButton = false;
 
       if (result)
       {
@@ -102,7 +80,7 @@ class Block : PitagoraObject {
       else
       {
         this.transform.localPosition = prevPos;
-        this.transform.rotation = prevRotation;
+        this.transform.rotation = rotation;
       }
     }
   }
