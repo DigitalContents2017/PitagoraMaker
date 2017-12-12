@@ -45,5 +45,5 @@ public class SimulationManager : MonoBehaviour {
 		{
 			child.EndSimulation();
 		}
-		}
+	}
 }
