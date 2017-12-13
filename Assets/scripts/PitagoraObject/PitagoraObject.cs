@@ -5,6 +5,7 @@ public class PitagoraObject : MonoBehaviour {
 
 	public Quaternion rotation;
 	public bool IsStatic = false;
+	protected bool isSimulating = false;
 
 	protected Vector3 prevPos;
 
@@ -12,7 +13,7 @@ public class PitagoraObject : MonoBehaviour {
 	public bool IsHold {
 		get { return isHold; }
 		set {
-			if(!IsStatic) {
+			if(!IsStatic && !isSimulating) {
 				if(!isHold && value) {
 					OnObjectHold();
 				} else if(isHold && !value) {
@@ -21,7 +22,7 @@ public class PitagoraObject : MonoBehaviour {
 
 				isHold = value;
 			} else {
-				// StaticオブジェクトならHoldできない
+				// Staticオブジェクトまたはシュミレーション中ならHoldできない
 				isHold = false;
 			}
 		}
