@@ -24,6 +24,8 @@ class Block : PitagoraObject {
 	public override void StartSimulation() {
 		base.StartSimulation();
 		isSimulating = true;
+		prevPos = this.transform.localPosition;
+		rotation = this.transform.rotation;
 		if (ObjectCollider != null)
 		{
 			ObjectCollider.enabled = true;
