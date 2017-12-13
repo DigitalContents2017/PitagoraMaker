@@ -2,11 +2,13 @@
 using UnityEngine.UI;
 
 public class SimulationButton : MonoBehaviour {
-	Text targetText;
+	public Sprite StartSprite;
+	public Sprite EndSprite;
+	Image image;
 
 	void Start()
 	{
-		targetText = GameObject.Find("SimulationButton/Text").GetComponent<Text>();
+		image = GetComponent<Image>();
 	}
 
 	public void OnClick()
@@ -16,11 +18,11 @@ public class SimulationButton : MonoBehaviour {
 
 	public void StartSimulation()
 	{
-		targetText.text = "Finish";
+		image.sprite = EndSprite;
 	}
 
 	public void EndSimulation()
 	{
-		targetText.text = "Start";
+		image.sprite = StartSprite;
 	}
 }
