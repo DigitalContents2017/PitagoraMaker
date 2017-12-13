@@ -20,7 +20,7 @@ public class SimulationManager : MonoBehaviour {
 		}
 	}
 
-	static void StartSimulation()
+	public static void StartSimulation()
 	{
 		Debug.Log("start");
 		isSimulating = true;
@@ -33,7 +33,7 @@ public class SimulationManager : MonoBehaviour {
 		}
 	}
 
-	static void EndSimulation()
+	public static void EndSimulation()
 	{
 		Debug.Log("end");
 		isSimulating = false;
