@@ -3,7 +3,6 @@ using UnityEngine;
 
 class Goal : PitagoraObject {
 	Canvas goalScreen;
-	bool isSimulating = false;
 
 	void Start() {
 		StageManager.SetObject(transform.position);

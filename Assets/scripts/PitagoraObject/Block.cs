@@ -3,7 +3,6 @@ using UnityEngine;
 
 class Block : PitagoraObject {
 	const float GLID_SIZE = 1.0f;
-	bool isSimulating = false;
 
 	int indexX, indexY;
 
