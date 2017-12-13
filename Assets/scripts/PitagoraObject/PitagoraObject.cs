@@ -43,6 +43,7 @@ public class PitagoraObject : MonoBehaviour {
 
 	protected virtual void OnObjectHold() {
 		prevPos = this.transform.localPosition;
+		rotation = this.transform.rotation;
 	}
 
 	protected virtual void OnObjectRelease() {
