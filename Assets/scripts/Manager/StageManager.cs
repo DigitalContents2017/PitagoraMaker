@@ -11,7 +11,7 @@ public class StageManager : MonoBehaviour {
 
 	static bool[,] stage;
 
-	void Start () {
+	void Awake () {
 		stage = new bool[WIDTH, HEIGHT];
 	}
 
