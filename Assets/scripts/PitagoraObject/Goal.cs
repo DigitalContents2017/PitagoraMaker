@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 class Goal : PitagoraObject {
@@ -16,7 +17,17 @@ class Goal : PitagoraObject {
 	}
 
 	public override void StartSimulation() {
-		isSimulating = true;
+		// 最初から隣接されているものは無視する。
+		StartCoroutine(DelayMethod(1, () => isSimulating = true));
+	}
+
+	IEnumerator DelayMethod(int delayFrameCount, Action action)
+	{
+		for (var i = 0; i < delayFrameCount; i++)
+		{
+			yield return null;
+		}
+		action();
 	}
 
 	public override void EndSimulation() {
