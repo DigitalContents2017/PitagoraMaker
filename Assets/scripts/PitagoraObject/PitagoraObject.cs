@@ -68,45 +68,60 @@ public class PitagoraObject : MonoBehaviour {
 	}
 
 	void OnTouchDown() {
+    Debug.Log("OnTouchDown");
 		this.IsHold = true;
 	}
 
-	void OnTouchUp() {
-		this.IsHold = false;
+	void OnTouchUp()
+  {
+    Debug.Log("OnTouchUp");
+    this.IsHold = false;
 	}
 
-	void UpdateTouch() {
-		var isTouch = false;
+  void UpdateTouch()
+  {
+    var isTouch = false;
 
-        // タッチされているとき
-        if(0 < Input.touchCount){
-            // タッチされている指の数だけ処理
-            for(int i = 0; i < Input.touchCount; i++){
-                // タッチ情報をコピー
-                Touch t = Input.GetTouch(i);
-                // タッチしたときかどうか
-                if(t.phase == TouchPhase.Began ){
-                    //タッチした位置からRayを飛ばす
-                    Ray ray = Camera.main.ScreenPointToRay(t.position);
-                    RaycastHit hit = new RaycastHit();
-                    if (Physics.Raycast(ray, out hit)){
-                        //Rayを飛ばしてあたったオブジェクトが自分自身だったら
-                        if (hit.collider.gameObject == this.gameObject){
-                            isTouch = true;
-                            break;
-                        }
-                    }
-                }
+    // タッチされているとき
+    if (0 < Input.touchCount)
+    {
+      // タッチされている指の数だけ処理
+      for (int i = 0; i < Input.touchCount; i++)
+      {
+        // タッチ情報をコピー
+        Touch t = Input.GetTouch(i);
+        // タッチしたときかどうか
+        if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
+        {
+          //タッチした位置からRayを飛ばす
+          Vector2 worldPoint = Camera.main.ScreenToWorldPoint(t.position);
+          RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+
+          if (hit)
+          {
+            //Rayを飛ばしてあたったオブジェクトが自分自身だったら
+            if (hit.collider.gameObject == this.gameObject)
+            {
+              Debug.Log("hit");
+
+              transform.position = worldPoint;
+
+              isTouch = true;
+              break;
             }
+          }
         }
-
-        if(isTouch != _isTouch) {
-        	if(isTouch) OnTouchDown();
-        	else OnTouchUp();
-        }
-
-        _isTouch = isTouch;
+      }
     }
+
+    if (isTouch != _isTouch)
+    {
+      if (isTouch) OnTouchDown();
+      else OnTouchUp();
+    }
+
+    _isTouch = isTouch;
+  }
 
 	public virtual void StartSimulation() {}
 	public virtual void EndSimulation() {}
