@@ -39,10 +39,10 @@ public class PitagoraObject : MonoBehaviour {
 		UpdateTouch();
 
 		if(this.IsHold) {
-			Vector3 screenPos = Input.mousePosition;
-			Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-			worldPos.z = 0;
-			transform.position = worldPos;
+			// Vector3 screenPos = Input.mousePosition;
+			// Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+			// worldPos.z = 0;
+			// transform.position = worldPos;
 		}
 	}
 
@@ -60,7 +60,10 @@ public class PitagoraObject : MonoBehaviour {
 	}
 
 	void OnMouseDrag() {
-
+		Vector3 screenPos = Input.mousePosition;
+		Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+		worldPos.z = 0;
+		this.transform.position = worldPos;
 	}
 
 	void OnMouseUp() {
@@ -68,60 +71,57 @@ public class PitagoraObject : MonoBehaviour {
 	}
 
 	void OnTouchDown() {
-    Debug.Log("OnTouchDown");
+    	Debug.Log("OnTouchDown");
 		this.IsHold = true;
 	}
 
-	void OnTouchUp()
-  {
-    Debug.Log("OnTouchUp");
-    this.IsHold = false;
+	void OnTouchDrag(Vector2 worldPoint) {
+		this.transform.position = worldPoint;
 	}
 
-  void UpdateTouch()
-  {
-    var isTouch = false;
+	void OnTouchUp() {
+    	Debug.Log("OnTouchUp");
+    	this.IsHold = false;
+	}
 
-    // タッチされているとき
-    if (0 < Input.touchCount)
-    {
-      // タッチされている指の数だけ処理
-      for (int i = 0; i < Input.touchCount; i++)
-      {
-        // タッチ情報をコピー
-        Touch t = Input.GetTouch(i);
-        // タッチしたときかどうか
-        if (t.phase == TouchPhase.Began || t.phase == TouchPhase.Stationary || t.phase == TouchPhase.Moved)
-        {
-          //タッチした位置からRayを飛ばす
-          Vector2 worldPoint = Camera.main.ScreenToWorldPoint(t.position);
-          RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+	void UpdateTouch() {
 
-          if (hit)
-          {
-            //Rayを飛ばしてあたったオブジェクトが自分自身だったら
-            if (hit.collider.gameObject == this.gameObject)
-            {
-              Debug.Log("hit");
+	    // タッチされているとき
+	    if (Input.touchCount > 0) {
+	    	// タッチされている指の数だけ処理
+	    	for (int i = 0; i < Input.touchCount; i++) {
+	    		var touch = Input.GetTouch(i);
+	    		if (touch.phase == TouchPhase.Began) {
+	    			//タッチした位置からRayを飛ばす
+	    			Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
+	    			RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 
-              transform.position = worldPoint;
+	    			if (hit) {
+	    				//Rayを飛ばしてあたったオブジェクトが自分自身だったら
+	    				if (hit.collider.gameObject == this.gameObject) {
+	    					OnTouchDown();
+	    					return;
+	    				}
+	    			}
 
-              isTouch = true;
-              break;
-            }
-          }
+	    			OnTouchDown();
+    			} else if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) {
+    				Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
+	    			RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+
+    				if (hit) {
+	    				//Rayを飛ばしてあたったオブジェクトが自分自身だったら
+	    				if (hit.collider.gameObject == this.gameObject) {
+		    				OnTouchDrag(worldPoint);
+		    				return;
+	    				}
+	    			}
+    			} else {
+    				OnTouchUp();
+    			}
+    		}         
         }
-      }
     }
-
-    if (isTouch != _isTouch)
-    {
-      if (isTouch) OnTouchDown();
-      else OnTouchUp();
-    }
-
-    _isTouch = isTouch;
-  }
 
 	public virtual void StartSimulation() {}
 	public virtual void EndSimulation() {}
