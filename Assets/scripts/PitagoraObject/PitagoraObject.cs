@@ -55,6 +55,7 @@ public class PitagoraObject : MonoBehaviour {
 
 	}
 
+  /*
 	void OnMouseDown() {
 		this.IsHold = true;
 	}
@@ -68,7 +69,7 @@ public class PitagoraObject : MonoBehaviour {
 
 	void OnMouseUp() {
 		this.IsHold = false;
-	}
+	}*/
 
 	void OnTouchDown() {
     	Debug.Log("OnTouchDown");
@@ -103,21 +104,16 @@ public class PitagoraObject : MonoBehaviour {
 	    					return;
 	    				}
 	    			}
-
-	    			OnTouchDown();
+            
     			} else if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) {
-    				Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
-	    			RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+            if(this.IsHold)
+          {
 
-    				if (hit) {
-	    				//Rayを飛ばしてあたったオブジェクトが自分自身だったら
-	    				if (hit.collider.gameObject == this.gameObject) {
-		    				OnTouchDrag(worldPoint);
-		    				return;
-	    				}
-	    			}
+            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
+            OnTouchDrag(worldPoint);
+          }
     			} else {
-    				OnTouchUp();
+            if(this.IsHold) OnTouchUp();
     			}
     		}         
         }
