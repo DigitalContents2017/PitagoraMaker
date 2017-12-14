@@ -45,20 +45,8 @@ class Block : PitagoraObject {
 		BoxCollider.enabled = true;
 	}
 
-	void OnMouseDown() {
-		base.IsHold = true;
-	}
-
-	void OnMouseDrag() {
-
-	}
-
-	void OnMouseUp() {
-		base.IsHold = false;
-	}
-
-	protected override void OnObjectRelease() {
-		base.OnObjectRelease();
+	protected override void OnObjectReleased() {
+		base.OnObjectReleased();
 
 		if (!isSimulating)
 		{
