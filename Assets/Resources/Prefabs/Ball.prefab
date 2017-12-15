@@ -91,6 +91,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotation: {x: 0, y: 0, z: 0, w: 0}
   IsStatic: 0
+  IsInstalled: 0
+  IsMotion: 1
 --- !u!212 &212019347238180554
 SpriteRenderer:
   m_ObjectHideFlags: 1
