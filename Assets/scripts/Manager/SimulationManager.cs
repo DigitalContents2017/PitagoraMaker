@@ -4,11 +4,13 @@ public class SimulationManager : MonoBehaviour {
 	static bool isSimulating = false;
 	static SimulationButton simulationButton;
 	static GameObject pitagoraObjects;
+	static BgmManager bgmManager;
 	static Object ballObject;
 
 	void Start()
 	{
 		simulationButton = GameObject.Find("SimulationButton").GetComponent<SimulationButton>();
+		bgmManager = GameObject.Find("BgmManager").GetComponent<BgmManager>();
 		pitagoraObjects = GameObject.Find("PitagoraObjects");
 	}
 
@@ -31,6 +33,7 @@ public class SimulationManager : MonoBehaviour {
 		{
 			child.StartSimulation();
 		}
+		bgmManager.StartSimulation();
 	}
 
 	public static void EndSimulation()
@@ -45,5 +48,6 @@ public class SimulationManager : MonoBehaviour {
 		{
 			child.EndSimulation();
 		}
+		bgmManager.EndSimulation();
 	}
 }
