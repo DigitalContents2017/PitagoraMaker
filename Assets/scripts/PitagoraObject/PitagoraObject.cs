@@ -144,4 +144,5 @@ public class PitagoraObject : MonoBehaviour {
 
 	public virtual void StartSimulation() {}
 	public virtual void EndSimulation() {}
+	public virtual void RemoveObject() {}
 }
