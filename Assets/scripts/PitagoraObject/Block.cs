@@ -48,8 +48,7 @@ class Block : PitagoraObject {
 		base.OnObjectReleased();
 
 		if (!Manager.simulationManager.isSimulating) {
-			if (IsTrashed())
-			{
+			if (IsTrashed()) {
 				StageManager.RemoveObject(prevPos);
 				Destroy(gameObject);
 				return;
@@ -58,16 +57,18 @@ class Block : PitagoraObject {
 			Vector3 glidPos = GetFitGlidPos();
 			var result = StageManager.SetObject(glidPos);
 
-			if (result)
-			{
+			if (result) {
 				StageManager.RemoveObject(prevPos);
 				transform.position = glidPos;
 				prevPos = glidPos;
-			}
-			else
-			{
-				this.transform.localPosition = prevPos;
-				this.transform.rotation = rotation;
+				this.IsInstalled = true;
+			} else {
+				if(this.IsInstalled) {
+					this.transform.localPosition = prevPos;
+					this.transform.rotation = rotation;
+				} else {
+					Destroy(gameObject);
+				}
 			}
 		}
 	}
