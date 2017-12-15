@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BgmManager : MonoBehaviour {
 	public AudioClip simulating;
+	public AudioClip goal;
 	private AudioSource audioSource;
 
 	void Start () {
@@ -17,5 +18,10 @@ public class BgmManager : MonoBehaviour {
 
 	public void EndSimulation() {
 		audioSource.Stop();
+	}
+
+	public void OnGoal() {
+		audioSource.clip = goal;
+		audioSource.Play();
 	}
 }

@@ -4,16 +4,19 @@ using UnityEngine;
 
 class Goal : PitagoraObject {
 	Canvas goalScreen;
+	BgmManager bgmManager;
 
 	void Start() {
 		StageManager.SetObject(transform.position);
 		goalScreen = GameObject.Find("GoalScreen").GetComponent<Canvas>();
+		bgmManager = GameObject.Find("BgmManager").GetComponent<BgmManager>();
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
 		if (isSimulating) {
 			goalScreen.enabled = true;
 		}
+		bgmManager.OnGoal();
 	}
 
 	public override void StartSimulation() {
