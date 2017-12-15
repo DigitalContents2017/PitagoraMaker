@@ -5,7 +5,6 @@ public class PitagoraObject : MonoBehaviour {
 
 	public Quaternion rotation;
 	public bool IsStatic = false;
-	protected bool isSimulating = false;
 
 	protected Vector3 prevPos;
 
@@ -14,9 +13,11 @@ public class PitagoraObject : MonoBehaviour {
 
 	bool isHold = false;
 	public bool IsHold {
-		get { return isHold; }
-		set {
-			if(!IsStatic && !isSimulating) {
+		get {
+			if(IsStatic) return false;
+			else return isHold;
+		} set {
+			if(!IsStatic) {
 				if(!isHold && value) {
 					OnObjectPressed();
 				} else if(isHold && !value) {
@@ -24,15 +25,13 @@ public class PitagoraObject : MonoBehaviour {
 				}
 
 				isHold = value;
-			} else {
-				// Staticオブジェクトまたはシュミレーション中ならHoldできない
-				isHold = false;
 			}
 		}
 	}
 
 
 	void Start() {
+		// タッチ用
 		if (Input.touchCount > 0) {
 	    	// タッチされている指の数だけ処理
 	    	for (int i = 0; i < Input.touchCount; i++) {
@@ -50,6 +49,8 @@ public class PitagoraObject : MonoBehaviour {
     				}
     			}
     		}
+    	} else {
+    		OnMouseDown();
     	}
 
 		OnStart();
@@ -57,13 +58,6 @@ public class PitagoraObject : MonoBehaviour {
 
 	void Update() {
 		UpdateTouch();
-
-		if(this.IsHold) {
-			// Vector3 screenPos = Input.mousePosition;
-			// Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-			// worldPos.z = 0;
-			// transform.position = worldPos;
-		}
 	}
 
 	protected virtual void OnObjectPressed() {
@@ -75,8 +69,8 @@ public class PitagoraObject : MonoBehaviour {
 
 	}
 
-  /*
 	void OnMouseDown() {
+		Debug.Log("OnMouseDown");
 		this.IsHold = true;
 	}
 
@@ -89,7 +83,7 @@ public class PitagoraObject : MonoBehaviour {
 
 	void OnMouseUp() {
 		this.IsHold = false;
-	}*/
+	}
 
 	void OnTouchDown() {
     	Debug.Log("OnTouchDown");
@@ -106,7 +100,6 @@ public class PitagoraObject : MonoBehaviour {
 	}
 
 	void UpdateTouch() {
-
 	    // タッチされているとき
 	    if (Input.touchCount > 0) {
 	    	// タッチされている指の数だけ処理

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
 public class SimulationManager : MonoBehaviour {
-	static bool isSimulating = false;
+	
+	public bool isSimulating = false;
+
 	static SimulationButton simulationButton;
 	static GameObject pitagoraObjects;
 	static Object ballObject;
@@ -12,7 +14,7 @@ public class SimulationManager : MonoBehaviour {
 		pitagoraObjects = GameObject.Find("PitagoraObjects");
 	}
 
-	public static void SwitchSimulation() {
+	public void SwitchSimulation() {
 		if(isSimulating) {
 			  EndSimulation();
 		} else {
@@ -20,9 +22,9 @@ public class SimulationManager : MonoBehaviour {
 		}
 	}
 
-	public static void StartSimulation()
+	public void StartSimulation()
 	{
-		Debug.Log("start");
+		Debug.Log("SimulationManager:StartSimulation()");
 		isSimulating = true;
 		simulationButton.StartSimulation();
 
@@ -33,9 +35,9 @@ public class SimulationManager : MonoBehaviour {
 		}
 	}
 
-	public static void EndSimulation()
+	public void EndSimulation()
 	{
-		Debug.Log("end");
+		Debug.Log("SimulationManager:EndSimulation()");
 		isSimulating = false;
 		simulationButton.EndSimulation();
 		Destroy(ballObject);

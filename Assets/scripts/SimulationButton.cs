@@ -13,7 +13,7 @@ public class SimulationButton : MonoBehaviour {
 
 	public void OnClick()
 	{
-		SimulationManager.SwitchSimulation();
+		Manager.simulationManager.SwitchSimulation();
 	}
 
 	public void StartSimulation()

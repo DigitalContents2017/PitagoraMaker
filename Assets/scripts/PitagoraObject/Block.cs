@@ -6,49 +6,53 @@ class Block : PitagoraObject {
 
 	int indexX, indexY;
 
-	Collider2D ObjectCollider;
-	BoxCollider2D BoxCollider;
+	// Collider2D ObjectCollider;
+	// BoxCollider2D BoxCollider;
 
 	public override void OnStart() {
 		prevPos = this.transform.localPosition;
-		ObjectCollider = GetComponent<Collider2D>();
+/* ObjectCollider = GetComponent<Collider2D>();
 		if (ObjectCollider != null)
 		{
 			ObjectCollider.enabled = false;
 		}
 		BoxCollider = gameObject.AddComponent<BoxCollider2D>();
-		BoxCollider.size = new Vector2(1, 1);
+		BoxCollider.size = new Vector2(1, 1);*/
 	}
 
 	public override void StartSimulation() {
 		base.StartSimulation();
-		isSimulating = true;
+
 		prevPos = this.transform.localPosition;
 		rotation = this.transform.rotation;
+
+		/*
 		if (ObjectCollider != null)
 		{
 			ObjectCollider.enabled = true;
 		}
-		BoxCollider.enabled = false;
+		BoxCollider.enabled = false;*/
 	}
 
 	public override void EndSimulation()
 	{
 		base.EndSimulation();
-		isSimulating = false;
+
 		this.transform.localPosition = prevPos;
 		this.transform.rotation = rotation;
+
+		/*
 		if (ObjectCollider != null)
 		{
 			ObjectCollider.enabled = false;
 		}
-		BoxCollider.enabled = true;
+		BoxCollider.enabled = true;*/
 	}
 
 	protected override void OnObjectReleased() {
 		base.OnObjectReleased();
 
-		if (!isSimulating)
+		if (!Manager.simulationManager.isSimulating)
 		{
 			if (IsTrashed())
 			{
