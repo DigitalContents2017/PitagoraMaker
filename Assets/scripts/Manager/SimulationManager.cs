@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
 public class SimulationManager : MonoBehaviour {
-	static bool isSimulating = false;
+	
+	public bool isSimulating = false;
+
 	static SimulationButton simulationButton;
 	static GameObject pitagoraObjects;
 	static BgmManager bgmManager;
@@ -9,8 +11,7 @@ public class SimulationManager : MonoBehaviour {
 	static GameObject topPanel;
 	static GameObject trash;
 
-	void Start()
-	{
+	void Start() {
 		simulationButton = GameObject.Find("SimulationButton").GetComponent<SimulationButton>();
 		bgmManager = GameObject.Find("BgmManager").GetComponent<BgmManager>();
 		pitagoraObjects = GameObject.Find("PitagoraObjects");
@@ -18,19 +19,9 @@ public class SimulationManager : MonoBehaviour {
 		trash = GameObject.Find("Trash");
 	}
 
-	public static void SwitchSimulation() {
-		if(isSimulating) {
-			  EndSimulation();
-		} else {
-			  StartSimulation();
-		}
-	}
-
-	public static void StartSimulation()
-	{
-		Debug.Log("start");
+	public void Begin() {
+		Debug.Log("SimulationManager:Begin()");
 		isSimulating = true;
-		simulationButton.StartSimulation();
 		topPanel.SetActive(false);
 		trash.SetActive(false);
 
@@ -42,11 +33,10 @@ public class SimulationManager : MonoBehaviour {
 		bgmManager.StartSimulation();
 	}
 
-	public static void EndSimulation()
-	{
-		Debug.Log("end");
+	public void End() {
+		Debug.Log("SimulationManager:End()");
 		isSimulating = false;
-		simulationButton.EndSimulation();
+
 		Destroy(ballObject);
 		topPanel.SetActive(true);
 		trash.SetActive(true);

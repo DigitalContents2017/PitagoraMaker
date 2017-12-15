@@ -36,8 +36,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4733904167006704}
   - component: {fileID: 212958705410736554}
-  - component: {fileID: 61426022439929494}
   - component: {fileID: 114696058131316230}
+  - component: {fileID: 61426022439929494}
   - component: {fileID: 50563985439762328}
   m_Layer: 0
   m_Name: LeftDomino

@@ -6,50 +6,48 @@ class Block : PitagoraObject {
 
 	int indexX, indexY;
 
-	Collider2D ObjectCollider;
-	BoxCollider2D BoxCollider;
+	Collider2D objectCollider;
+	BoxCollider2D touchCollider;
 
-	protected void Start() {
+	public override void OnStart() {
 		prevPos = this.transform.localPosition;
-		ObjectCollider = GetComponent<Collider2D>();
-		if (ObjectCollider != null)
-		{
-			ObjectCollider.enabled = false;
+
+		objectCollider = GetComponent<Collider2D>();
+		if (objectCollider != null) {
+			objectCollider.enabled = false;
 		}
-		BoxCollider = gameObject.AddComponent<BoxCollider2D>();
-		BoxCollider.size = new Vector2(1, 1);
+		touchCollider = gameObject.AddComponent<BoxCollider2D>();
+		touchCollider.size = new Vector2(1, 1);
 	}
 
 	public override void StartSimulation() {
 		base.StartSimulation();
-		isSimulating = true;
+
 		prevPos = this.transform.localPosition;
 		rotation = this.transform.rotation;
-		if (ObjectCollider != null)
-		{
-			ObjectCollider.enabled = true;
+
+		if (objectCollider != null) {
+			objectCollider.enabled = true;
 		}
-		BoxCollider.enabled = false;
+		touchCollider.enabled = false;
 	}
 
-	public override void EndSimulation()
-	{
+	public override void EndSimulation() {
 		base.EndSimulation();
-		isSimulating = false;
+
 		this.transform.localPosition = prevPos;
 		this.transform.rotation = rotation;
-		if (ObjectCollider != null)
-		{
-			ObjectCollider.enabled = false;
+
+		if (objectCollider != null) {
+			objectCollider.enabled = false;
 		}
-		BoxCollider.enabled = true;
+		touchCollider.enabled = true;
 	}
 
 	protected override void OnObjectReleased() {
 		base.OnObjectReleased();
 
-		if (!isSimulating)
-		{
+		if (!Manager.simulationManager.isSimulating) {
 			if (IsTrashed())
 			{
 				StageManager.RemoveObject(prevPos);

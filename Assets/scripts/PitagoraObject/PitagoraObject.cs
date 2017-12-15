@@ -5,17 +5,19 @@ public class PitagoraObject : MonoBehaviour {
 
 	public Quaternion rotation;
 	public bool IsStatic = false;
-	protected bool isSimulating = false;
 
 	protected Vector3 prevPos;
 
 	bool _isTouch = false;
+	int touchNo = -1;
 
 	bool isHold = false;
 	public bool IsHold {
-		get { return isHold; }
-		set {
-			if(!IsStatic && !isSimulating) {
+		get {
+			if(IsStatic) return false;
+			else return isHold;
+		} set {
+			if(!IsStatic) {
 				if(!isHold && value) {
 					OnObjectPressed();
 				} else if(isHold && !value) {
@@ -23,26 +25,45 @@ public class PitagoraObject : MonoBehaviour {
 				}
 
 				isHold = value;
-			} else {
-				// Staticオブジェクトまたはシュミレーション中ならHoldできない
-				isHold = false;
 			}
 		}
 	}
 
 
 	void Start() {
+		// タッチ用
+		if (Input.touchCount > 0) {
+	    	// タッチされている指の数だけ処理
+	    	for (int i = 0; i < Input.touchCount; i++) {
+	    		var touch = Input.GetTouch(i);
+	    		//タッチした位置からRayを飛ばす
+	    		Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
+	    		RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 
+	    		if (hit) {
+    				//Rayを飛ばしてあたったオブジェクトが自分自身だったら
+    				if (hit.collider.gameObject == this.gameObject) {
+    					touchNo = touch.fingerId;
+    					OnTouchDown();
+    					return;
+    				}
+    			}
+    		}
+    	} else {
+    		OnMouseDown();
+    	}
+    	
+		OnStart();
 	}
 
 	void Update() {
 		UpdateTouch();
 
-		if(this.IsHold) {
-			// Vector3 screenPos = Input.mousePosition;
-			// Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-			// worldPos.z = 0;
-			// transform.position = worldPos;
+		if(this.IsHold && touchNo == -1) {
+			Vector3 screenPos = Input.mousePosition;
+			Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+			worldPos.z = 0;
+			this.transform.position = worldPos;
 		}
 	}
 
@@ -55,8 +76,8 @@ public class PitagoraObject : MonoBehaviour {
 
 	}
 
-  /*
 	void OnMouseDown() {
+		Debug.Log("OnMouseDown");
 		this.IsHold = true;
 	}
 
@@ -69,7 +90,7 @@ public class PitagoraObject : MonoBehaviour {
 
 	void OnMouseUp() {
 		this.IsHold = false;
-	}*/
+	}
 
 	void OnTouchDown() {
     	Debug.Log("OnTouchDown");
@@ -86,7 +107,6 @@ public class PitagoraObject : MonoBehaviour {
 	}
 
 	void UpdateTouch() {
-
 	    // タッチされているとき
 	    if (Input.touchCount > 0) {
 	    	// タッチされている指の数だけ処理
@@ -100,24 +120,27 @@ public class PitagoraObject : MonoBehaviour {
 	    			if (hit) {
 	    				//Rayを飛ばしてあたったオブジェクトが自分自身だったら
 	    				if (hit.collider.gameObject == this.gameObject) {
+	    					touchNo = touch.fingerId;
 	    					OnTouchDown();
 	    					return;
 	    				}
 	    			}
-            
     			} else if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) {
-            if(this.IsHold)
-          {
-
-            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
-            OnTouchDrag(worldPoint);
-          }
+    				if(touchNo == touch.fingerId && this.IsHold) {
+    					Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
+    					OnTouchDrag(worldPoint);
+    				}
     			} else {
-            if(this.IsHold) OnTouchUp();
+    				if(touchNo == touch.fingerId && this.IsHold) {
+    					touchNo = -1;
+    					OnTouchUp();
+    				}
     			}
     		}         
         }
     }
+
+	public virtual void OnStart() {}
 
 	public virtual void StartSimulation() {}
 	public virtual void EndSimulation() {}
