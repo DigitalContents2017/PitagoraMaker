@@ -20,8 +20,6 @@ class Goal : PitagoraObject {
 			goalScreen.enabled = true;
 			bgmManager.OnGoal();
 			isGoal = true;
-
-			GameObject.Find("SimulationButton").GetComponent<SimulationButton>().IsSimulation = false;
 		}
 	}
 
