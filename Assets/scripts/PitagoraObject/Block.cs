@@ -73,6 +73,11 @@ class Block : PitagoraObject {
 		}
 	}
 
+	public override void RemoveObject() {
+		StageManager.RemoveObject(prevPos);
+		Destroy(gameObject);
+	}
+
 	Vector3 GetFitGlidPos() {
 		Vector3 diff = new Vector3(transform.position.x % GLID_SIZE, transform.position.y % GLID_SIZE, 0);
 		Vector3 glidPos = new Vector3(transform.position.x - diff.x, transform.position.y - diff.y, 0);
