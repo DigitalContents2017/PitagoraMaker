@@ -102,17 +102,17 @@ public class PitagoraObject : MonoBehaviour {
 	    				//Rayを飛ばしてあたったオブジェクトが自分自身だったら
 	    				if (hit.collider.gameObject == this.gameObject) {
 	    					OnTouchDown();
-	    					touchNo = i;
+	    					touchNo = touch.fingerId;
 	    					return;
 	    				}
 	    			}
     			} else if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) {
-    				if(touchNo == i && this.IsHold) {
+    				if(touchNo == touch.fingerId && this.IsHold) {
     					Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
     					OnTouchDrag(worldPoint);
     				}
     			} else {
-    				if(touchNo == i && this.IsHold) {
+    				if(touchNo == touch.fingerId && this.IsHold) {
     					OnTouchUp();
     					touchNo = -1;
     				}
