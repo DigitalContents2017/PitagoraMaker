@@ -38,6 +38,7 @@ public class SimulationManager : MonoBehaviour {
 		isSimulating = false;
 
 		Destroy(ballObject);
+		simulationButton.IsSimulation = false; 
 		topPanel.SetActive(true);
 		trash.SetActive(true);
 
