@@ -25,17 +25,7 @@ class Goal : PitagoraObject {
 	}
 
 	public override void StartSimulation() {
-		// 最初から隣接されているものは無視する。
-		StartCoroutine(DelayMethod(1, () => simulation.isSimulating = true));
-	}
-
-	IEnumerator DelayMethod(int delayFrameCount, Action action)
-	{
-		for (var i = 0; i < delayFrameCount; i++)
-		{
-			yield return null;
-		}
-		action();
+		simulation.isSimulating = true;
 	}
 
 	public override void EndSimulation() {
