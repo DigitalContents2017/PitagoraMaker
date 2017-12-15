@@ -9,15 +9,17 @@ public class PitagoraObject : MonoBehaviour {
 
 	protected Vector3 prevPos;
 
+	bool _isTouch = false;
+
 	bool isHold = false;
 	public bool IsHold {
 		get { return isHold; }
 		set {
 			if(!IsStatic && !isSimulating) {
 				if(!isHold && value) {
-					OnObjectHold();
+					OnObjectPressed();
 				} else if(isHold && !value) {
-					OnObjectRelease();
+					OnObjectReleased();
 				}
 
 				isHold = value;
@@ -34,22 +36,88 @@ public class PitagoraObject : MonoBehaviour {
 	}
 
 	void Update() {
+		UpdateTouch();
+
 		if(this.IsHold) {
-			Vector3 screenPos = Input.mousePosition;
-			Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-			worldPos.z = 0;
-			transform.position = worldPos;
+			// Vector3 screenPos = Input.mousePosition;
+			// Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+			// worldPos.z = 0;
+			// transform.position = worldPos;
 		}
 	}
 
-	protected virtual void OnObjectHold() {
+	protected virtual void OnObjectPressed() {
 		prevPos = this.transform.localPosition;
 		rotation = this.transform.rotation;
 	}
 
-	protected virtual void OnObjectRelease() {
+	protected virtual void OnObjectReleased() {
 
 	}
+
+  /*
+	void OnMouseDown() {
+		this.IsHold = true;
+	}
+
+	void OnMouseDrag() {
+		Vector3 screenPos = Input.mousePosition;
+		Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+		worldPos.z = 0;
+		this.transform.position = worldPos;
+	}
+
+	void OnMouseUp() {
+		this.IsHold = false;
+	}*/
+
+	void OnTouchDown() {
+    	Debug.Log("OnTouchDown");
+		this.IsHold = true;
+	}
+
+	void OnTouchDrag(Vector2 worldPoint) {
+		this.transform.position = worldPoint;
+	}
+
+	void OnTouchUp() {
+    	Debug.Log("OnTouchUp");
+    	this.IsHold = false;
+	}
+
+	void UpdateTouch() {
+
+	    // タッチされているとき
+	    if (Input.touchCount > 0) {
+	    	// タッチされている指の数だけ処理
+	    	for (int i = 0; i < Input.touchCount; i++) {
+	    		var touch = Input.GetTouch(i);
+	    		if (touch.phase == TouchPhase.Began) {
+	    			//タッチした位置からRayを飛ばす
+	    			Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
+	    			RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+
+	    			if (hit) {
+	    				//Rayを飛ばしてあたったオブジェクトが自分自身だったら
+	    				if (hit.collider.gameObject == this.gameObject) {
+	    					OnTouchDown();
+	    					return;
+	    				}
+	    			}
+            
+    			} else if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) {
+            if(this.IsHold)
+          {
+
+            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
+            OnTouchDrag(worldPoint);
+          }
+    			} else {
+            if(this.IsHold) OnTouchUp();
+    			}
+    		}         
+        }
+    }
 
 	public virtual void StartSimulation() {}
 	public virtual void EndSimulation() {}
