@@ -209,6 +209,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotation: {x: 0, y: 0, z: 0, w: 0}
   IsStatic: 0
+  IsInstalled: 0
+  IsMotion: 0
   isFreeze: 0
 --- !u!114 &114580165297662134
 MonoBehaviour:
@@ -223,6 +225,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotation: {x: 0, y: 0, z: 0, w: 0}
   IsStatic: 0
+  IsInstalled: 0
+  IsMotion: 1
 --- !u!114 &114696058131316230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,6 +240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotation: {x: 0, y: 0, z: 0, w: 0}
   IsStatic: 0
+  IsInstalled: 0
+  IsMotion: 0
   isFreeze: 0
 --- !u!212 &212254161158443006
 SpriteRenderer:
