@@ -16,7 +16,8 @@ class Goal : PitagoraObject {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
-		if (Manager.simulationManager.isSimulating && !isGoal) {
+		PitagoraObject pObject = collision.gameObject.GetComponent<PitagoraObject>();
+		if (pObject.IsMotion && Manager.simulationManager.isSimulating && !isGoal) {
 			goalScreen.enabled = true;
 			bgmManager.OnGoal();
 			isGoal = true;

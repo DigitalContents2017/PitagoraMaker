@@ -6,6 +6,7 @@ public class PitagoraObject : MonoBehaviour {
 	public Quaternion rotation;
 	public bool IsStatic = false;
 	public bool IsInstalled = false;
+	public bool IsMotion = false;
 
 	protected Vector3 prevPos;
 
