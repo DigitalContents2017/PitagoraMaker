@@ -10,6 +10,7 @@ public class PitagoraObject : MonoBehaviour {
 	protected Vector3 prevPos;
 
 	bool _isTouch = false;
+	int touchNo = -1;
 
 	bool isHold = false;
 	public bool IsHold {
@@ -101,19 +102,20 @@ public class PitagoraObject : MonoBehaviour {
 	    				//Rayを飛ばしてあたったオブジェクトが自分自身だったら
 	    				if (hit.collider.gameObject == this.gameObject) {
 	    					OnTouchDown();
+	    					touchNo = i;
 	    					return;
 	    				}
 	    			}
-            
     			} else if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) {
-            if(this.IsHold)
-          {
-
-            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
-            OnTouchDrag(worldPoint);
-          }
+    				if(touchNo == i && this.IsHold) {
+    					Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
+    					OnTouchDrag(worldPoint);
+    				}
     			} else {
-            if(this.IsHold) OnTouchUp();
+    				if(touchNo == i && this.IsHold) {
+    					OnTouchUp();
+    					touchNo = -1;
+    				}
     			}
     		}         
         }
