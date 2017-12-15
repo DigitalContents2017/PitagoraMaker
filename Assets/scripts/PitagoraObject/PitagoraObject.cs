@@ -33,9 +33,24 @@ public class PitagoraObject : MonoBehaviour {
 
 
 	void Start() {
-		var touch = Input.GetTouch(0);
-		touchNo = touch.fingerId;
-		OnTouchDown();
+		if (Input.touchCount > 0) {
+	    	// タッチされている指の数だけ処理
+	    	for (int i = 0; i < Input.touchCount; i++) {
+	    		var touch = Input.GetTouch(i);
+	    		//タッチした位置からRayを飛ばす
+	    		Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
+	    		RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+
+	    		if (hit) {
+    				//Rayを飛ばしてあたったオブジェクトが自分自身だったら
+    				if (hit.collider.gameObject == this.gameObject) {
+    					touchNo = touch.fingerId;
+    					OnTouchDown();
+    					return;
+    				}
+    			}
+    		}
+    	}
 
 		OnStart();
 	}
