@@ -55,7 +55,7 @@ public class PitagoraObject : MonoBehaviour {
 
 	}
 
-  /*
+
 	void OnMouseDown() {
 		this.IsHold = true;
 	}
@@ -69,7 +69,7 @@ public class PitagoraObject : MonoBehaviour {
 
 	void OnMouseUp() {
 		this.IsHold = false;
-	}*/
+	}
 
 	void OnTouchDown() {
     	Debug.Log("OnTouchDown");
