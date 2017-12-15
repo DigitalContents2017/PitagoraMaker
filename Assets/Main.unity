@@ -746,6 +746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50f898434e054dbab71e51d163e63f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSimulating: 0
 --- !u!1 &323460369
 GameObject:
   m_ObjectHideFlags: 0
@@ -5035,6 +5036,16 @@ Prefab:
     - target: {fileID: 212998576540695960, guid: 664ee0ad2bd6049f499cf56600d625f4,
         type: 2}
       propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61867498396671364, guid: 664ee0ad2bd6049f499cf56600d625f4,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61867498396671364, guid: 664ee0ad2bd6049f499cf56600d625f4,
+        type: 2}
+      propertyPath: m_SpriteTilingProperty.newSize.y
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
