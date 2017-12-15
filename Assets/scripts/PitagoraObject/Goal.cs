@@ -5,6 +5,7 @@ using UnityEngine;
 class Goal : PitagoraObject {
 	Canvas goalScreen;
 	BgmManager bgmManager;
+	bool isGoal = false;
 
 	void Start() {
 		StageManager.SetObject(transform.position);
@@ -13,10 +14,11 @@ class Goal : PitagoraObject {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
-		if (isSimulating) {
+		if (isSimulating && !isGoal) {
 			goalScreen.enabled = true;
+			bgmManager.OnGoal();
+			isGoal = true;
 		}
-		bgmManager.OnGoal();
 	}
 
 	public override void StartSimulation() {
@@ -35,5 +37,6 @@ class Goal : PitagoraObject {
 
 	public override void EndSimulation() {
 		isSimulating = false;
+		isGoal = false;
 	}
 }
