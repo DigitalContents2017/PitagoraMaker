@@ -5,9 +5,8 @@ class RigidBlock : Block
 {
 	Rigidbody2D rigidbody;
 
-	void Start()
-	{
-		base.Start();
+	public override void OnStart() {
+		base.OnStart();
 		rigidbody = GetComponent<Rigidbody2D>();
 		rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
 	}

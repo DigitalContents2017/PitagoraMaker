@@ -33,9 +33,11 @@ public class PitagoraObject : MonoBehaviour {
 
 
 	void Start() {
-		var touch = Input.GetTouch(i);
+		var touch = Input.GetTouch(0);
 		touchNo = touch.fingerId;
 		OnTouchDown();
+
+		OnStart();
 	}
 
 	void Update() {
@@ -122,6 +124,8 @@ public class PitagoraObject : MonoBehaviour {
     		}         
         }
     }
+
+	public virtual void OnStart() {}
 
 	public virtual void StartSimulation() {}
 	public virtual void EndSimulation() {}

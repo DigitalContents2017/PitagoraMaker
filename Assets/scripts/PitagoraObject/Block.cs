@@ -9,7 +9,7 @@ class Block : PitagoraObject {
 	Collider2D ObjectCollider;
 	BoxCollider2D BoxCollider;
 
-	protected void Start() {
+	public override void OnStart() {
 		prevPos = this.transform.localPosition;
 		ObjectCollider = GetComponent<Collider2D>();
 		if (ObjectCollider != null)
