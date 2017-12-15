@@ -33,7 +33,9 @@ public class PitagoraObject : MonoBehaviour {
 
 
 	void Start() {
-
+		var touch = Input.GetTouch(i);
+		touchNo = touch.fingerId;
+		OnTouchDown();
 	}
 
 	void Update() {
@@ -101,8 +103,8 @@ public class PitagoraObject : MonoBehaviour {
 	    			if (hit) {
 	    				//Rayを飛ばしてあたったオブジェクトが自分自身だったら
 	    				if (hit.collider.gameObject == this.gameObject) {
-	    					OnTouchDown();
 	    					touchNo = touch.fingerId;
+	    					OnTouchDown();
 	    					return;
 	    				}
 	    			}
@@ -113,8 +115,8 @@ public class PitagoraObject : MonoBehaviour {
     				}
     			} else {
     				if(touchNo == touch.fingerId && this.IsHold) {
-    					OnTouchUp();
     					touchNo = -1;
+    					OnTouchUp();
     				}
     			}
     		}         
