@@ -78,6 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2763986660bfb48bd91e93a1787b6ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  IsStatic: 0
 --- !u!212 &212443624963190742
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -112,7 +114,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c019301985fe0472dab4cd4c67c887f1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eb84633eb1ada47508cb8f664491818b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
