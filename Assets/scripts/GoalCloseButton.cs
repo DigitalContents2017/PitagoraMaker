@@ -14,6 +14,5 @@ public class GoalCloseButton : MonoBehaviour
 	{
 		goalScreen.enabled = false;
 		Manager.simulationManager.End();
-		GameObject.Find("SimulationButton").GetComponent<SimulationButton>().IsSimulation = false;
 	}
 }
