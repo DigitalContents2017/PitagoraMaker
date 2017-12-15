@@ -36,8 +36,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4733904167006704}
   - component: {fileID: 212958705410736554}
-  - component: {fileID: 61426022439929494}
   - component: {fileID: 114696058131316230}
+  - component: {fileID: 61426022439929494}
   - component: {fileID: 50563985439762328}
   m_Layer: 0
   m_Name: LeftDomino
@@ -207,6 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2bcc21079cd4ff381f908f09aab5e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  IsStatic: 0
   isFreeze: 0
 --- !u!114 &114580165297662134
 MonoBehaviour:
@@ -219,6 +221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2763986660bfb48bd91e93a1787b6ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  IsStatic: 0
 --- !u!114 &114696058131316230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -230,6 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2bcc21079cd4ff381f908f09aab5e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  IsStatic: 0
   isFreeze: 0
 --- !u!212 &212254161158443006
 SpriteRenderer:

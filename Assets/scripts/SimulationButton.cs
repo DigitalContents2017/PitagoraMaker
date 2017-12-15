@@ -6,23 +6,22 @@ public class SimulationButton : MonoBehaviour {
 	public Sprite EndSprite;
 	Image image;
 
-	void Start()
-	{
-		image = GetComponent<Image>();
-	}
+	bool isSimulation = false;
 
-	public void OnClick()
-	{
-		Manager.simulationManager.SwitchSimulation();
-	}
-
-	public void StartSimulation()
-	{
-		image.sprite = EndSprite;
-	}
-
-	public void EndSimulation()
-	{
+	void Start() {
+		image = this.GetComponent<Image>();
 		image.sprite = StartSprite;
+	}
+
+	public void OnClick() {
+		if(!isSimulation) {
+			Manager.simulationManager.Begin();
+			image.sprite = EndSprite;
+		} else {
+			Manager.simulationManager.End();
+			image.sprite = StartSprite;
+		}
+
+		isSimulation = !isSimulation;
 	}
 }

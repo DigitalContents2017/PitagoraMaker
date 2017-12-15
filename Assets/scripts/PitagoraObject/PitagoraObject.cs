@@ -52,12 +52,19 @@ public class PitagoraObject : MonoBehaviour {
     	} else {
     		OnMouseDown();
     	}
-
+    	
 		OnStart();
 	}
 
 	void Update() {
 		UpdateTouch();
+
+		if(this.IsHold && touchNo == -1) {
+			Vector3 screenPos = Input.mousePosition;
+			Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+			worldPos.z = 0;
+			this.transform.position = worldPos;
+		}
 	}
 
 	protected virtual void OnObjectPressed() {

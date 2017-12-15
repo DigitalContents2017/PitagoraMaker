@@ -13,6 +13,6 @@ public class GoalCloseButton : MonoBehaviour
 	public void OnClick()
 	{
 		goalScreen.enabled = false;
-		Manager.simulationManager.EndSimulation();
+		Manager.simulationManager.End();
 	}
 }
