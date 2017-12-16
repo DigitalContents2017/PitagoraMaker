@@ -5,21 +5,15 @@ class RigidBlock : Block
 {
 	Rigidbody2D rigidbody;
 
-	public override void OnStart() {
-		base.OnStart();
-		rigidbody = GetComponent<Rigidbody2D>();
-		rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-	}
-
 	public override void StartSimulation()
 	{
 		base.StartSimulation();
-		rigidbody.constraints = RigidbodyConstraints2D.None;
+		this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
 	}
 
 	public override void EndSimulation()
 	{
 		base.EndSimulation();
-		rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+		this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
 	}
 }

@@ -6,11 +6,16 @@ class ChildBlock : PitagoraObject
  Quaternion prevRotation;
  Collider2D ObjectCollider;
  public bool isFreeze = false;
+
+ void Awake() {
+  this.IsChild = true;
+ }
  
  void Start()
  {
-  GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-  ObjectCollider = GetComponent<Collider2D>();
+  
+    this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+  ObjectCollider = this.GetComponent<Collider2D>();
   if (ObjectCollider != null)
   {
    ObjectCollider.enabled = false;

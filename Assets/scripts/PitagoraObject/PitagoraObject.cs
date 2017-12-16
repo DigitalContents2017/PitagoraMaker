@@ -7,6 +7,7 @@ public class PitagoraObject : MonoBehaviour {
 	public bool IsStatic = false;
 	public bool IsInstalled = false;
 	public bool IsMotion = false;
+	public bool IsChild = false;
 
 	protected Vector3 prevPos;
 
@@ -52,10 +53,8 @@ public class PitagoraObject : MonoBehaviour {
     			}
     		}
     	} else {
-    		OnMouseDown();
+    		//OnMouseDown();
     	}
-    	
-		OnStart();
 	}
 
 	void Update() {
@@ -67,17 +66,31 @@ public class PitagoraObject : MonoBehaviour {
 			worldPos.z = 0;
 			this.transform.position = worldPos;
 		}
+
+		if(!this.IsHold && this.transform.localPosition.y >= 8.1f && !this.IsChild) {
+			Destroy(this.gameObject);
+		}
 	}
 
 	protected virtual void OnObjectPressed() {
+		Debug.Log("PitagoraObject:OnOnjectPressed()");
+
 		prevPos = this.transform.localPosition;
 		rotation = this.transform.rotation;
+
+		var rigidbody = GetComponent<Rigidbody2D>();
+		if(rigidbody != null) rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
 	}
 
 	protected virtual void OnObjectReleased() {
-
+		Debug.Log("PitagoraObject:OnOnjectReleased()");
+		if (this.transform.localPosition.y >= 8.1f) {
+			Destroy(gameObject);
+			return;
+		}
 	}
 
+/*
 	void OnMouseDown() {
 		Debug.Log("OnMouseDown");
 		this.IsHold = true;
@@ -94,7 +107,7 @@ public class PitagoraObject : MonoBehaviour {
 
 	void OnMouseUp() {
 		this.IsHold = false;
-	}
+	}*/
 
 	void OnTouchDown() {
     	Debug.Log("OnTouchDown");
