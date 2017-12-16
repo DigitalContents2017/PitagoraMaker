@@ -57,7 +57,6 @@ GameObject:
   - component: {fileID: 4460567199729354}
   - component: {fileID: 212254161158443006}
   - component: {fileID: 61036492813727914}
-  - component: {fileID: 114443896711725200}
   - component: {fileID: 50343530186741088}
   - component: {fileID: 114124677449509376}
   m_Layer: 0
@@ -209,6 +208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eaea9730fab443c49bcba8c54540f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsMotion: 1
+  IsChild: 1
 --- !u!114 &114320968657975912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,20 +221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eaea9730fab443c49bcba8c54540f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114443896711725200
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1689820115393628}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d2bcc21079cd4ff381f908f09aab5e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsMotion: 0
-  IsChild: 0
-  isFreeze: 0
+  IsMotion: 1
+  IsChild: 1
 --- !u!114 &114696058131316230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -245,8 +234,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2bcc21079cd4ff381f908f09aab5e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prevRot: {x: 0, y: 0, z: 0, w: 0}
+  prevPos: {x: 0, y: 0, z: 0}
+  IsInstalled: 0
   IsMotion: 0
   IsChild: 0
+  prevRotation: {x: 0, y: 0, z: 0, w: 0}
+  ObjectCollider: {fileID: 0}
   isFreeze: 0
 --- !u!114 &114802350396177258
 MonoBehaviour:
