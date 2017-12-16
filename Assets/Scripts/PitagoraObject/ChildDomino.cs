@@ -13,11 +13,11 @@ class ChildDomino : MonoBehaviour {
 	public void StartSimulation() {
 		prevPos = this.transform.localPosition;
 		prevRotation = this.transform.localRotation;
-		GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+		this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
 	}
 
 	public void EndSimulation() {
-		GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+		this.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
 		this.transform.localPosition = prevPos;
 		this.transform.localRotation = prevRotation;
 	}
