@@ -2,7 +2,7 @@
 
 public class SimulationManager : MonoBehaviour {
 	
-	public bool isSimulating = false;
+	public bool IsSimulating = false;
 
 	static SimulationButton simulationButton;
 	static GameObject pitagoraObjects;
@@ -21,13 +21,12 @@ public class SimulationManager : MonoBehaviour {
 
 	public void Begin() {
 		Debug.Log("SimulationManager:Begin()");
-		isSimulating = true;
+		IsSimulating = true;
 		topPanel.SetActive(false);
 		trash.SetActive(false);
 
 		var childTransform = pitagoraObjects.GetComponentsInChildren<PitagoraObject>();
-		foreach (var child in childTransform)
-		{
+		foreach (var child in childTransform) {
 			child.StartSimulation();
 		}
 		bgmManager.StartSimulation();
@@ -35,7 +34,7 @@ public class SimulationManager : MonoBehaviour {
 
 	public void End() {
 		Debug.Log("SimulationManager:End()");
-		isSimulating = false;
+		IsSimulating = false;
 
 		Destroy(ballObject);
 		simulationButton.IsSimulation = false; 
@@ -43,8 +42,7 @@ public class SimulationManager : MonoBehaviour {
 		trash.SetActive(true);
 
 		var childTransform = pitagoraObjects.GetComponentsInChildren<PitagoraObject>();
-		foreach (var child in childTransform)
-		{
+		foreach (var child in childTransform) {
 			child.EndSimulation();
 		}
 		bgmManager.EndSimulation();

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-class Domino : Block {
+class Domino : MovableObject {
 
 	ChildDomino[] childDominos;
 

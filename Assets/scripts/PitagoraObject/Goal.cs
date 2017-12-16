@@ -11,13 +11,14 @@ class Goal : PitagoraObject {
 	void Start() {
 		StageManager.SetObject(this.transform.position);
 		goalScreen = GameObject.Find("GoalScreen").GetComponent<Canvas>();
-		simulation = Manager.simulationManager;
 		bgmManager = GameObject.Find("BgmManager").GetComponent<BgmManager>();
+		simulation = Manager.simulationManager;
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
-		PitagoraObject pObject = collision.gameObject.GetComponent<PitagoraObject>();
-		if (pObject.IsMotion && Manager.simulationManager.isSimulating && !isGoal) {
+		var pObject = collision.gameObject.GetComponent<PitagoraObject>();
+
+		if (pObject.IsMotion && simulation.IsSimulating && !isGoal) {
 			goalScreen.enabled = true;
 			bgmManager.OnGoal();
 			isGoal = true;
@@ -25,11 +26,11 @@ class Goal : PitagoraObject {
 	}
 
 	public override void StartSimulation() {
-		simulation.isSimulating = true;
+		simulation.IsSimulating = true;
 	}
 
 	public override void EndSimulation() {
-		simulation.isSimulating = false;
+		simulation.IsSimulating = false;
 		isGoal = false;
 	}
 }

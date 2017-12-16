@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-class RigidBlock : Block
+class RigidBlock : MovableObject
 {
 	Rigidbody2D rigidbody;
 
