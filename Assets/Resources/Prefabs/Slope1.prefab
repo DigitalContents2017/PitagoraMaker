@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4113028734513404}
   - component: {fileID: 212443624963190742}
-  - component: {fileID: 114321848233185472}
   - component: {fileID: 60088076642964506}
+  - component: {fileID: 114533990905688212}
   m_Layer: 0
   m_Name: Slope1
   m_TagString: Untagged
@@ -109,7 +109,7 @@ PolygonCollider2D:
       - {x: 0.44400004, y: -0.49400002}
       - {x: 0.416, y: -0.492}
       - {x: 0.37600002, y: -0.48800004}
---- !u!114 &114321848233185472
+--- !u!114 &114533990905688212
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -117,11 +117,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1592492118918358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2763986660bfb48bd91e93a1787b6ad8, type: 3}
+  m_Script: {fileID: 11500000, guid: fc5343600475b44118403dbc32123cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: {x: 0, y: 0, z: 0, w: 0}
-  IsStatic: 0
+  IsMotion: 0
+  IsChild: 0
 --- !u!212 &212443624963190742
 SpriteRenderer:
   m_ObjectHideFlags: 1
