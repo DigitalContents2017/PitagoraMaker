@@ -58,7 +58,7 @@ public class MovableObject : PitagoraObject {
     			}
     		}
     	} else {
-    		// OnMouseDown();
+    		OnMouseDown();
     	}
 
 		var rigidbody = this.GetComponent<Rigidbody2D>();
@@ -76,12 +76,7 @@ public class MovableObject : PitagoraObject {
 	protected virtual void OnObjectReleased() {
 		Debug.Log("PitagoraObject:OnOnjectReleased()");
 
-		if (IsTrashed()) {
-			RemoveObject();
-			return;
-		}
-
-		if (this.transform.localPosition.y >= 8.1f) {
+		if (IsTrashed() && this.transform.localPosition.y >= 8.1f) {
 			RemoveObject();
 			return;
 		}
@@ -90,15 +85,16 @@ public class MovableObject : PitagoraObject {
 		var result = StageManager.SetObject(glidPos);
 
 		if (result) {
+			// オブジェクトを設置できた
 			StageManager.RemoveObject(prevPos);
 			transform.position = glidPos;
 			prevPos = glidPos;
 			this.IsInstalled = true;
 		} else {
-			if(this.IsInstalled) {
-				this.transform.localPosition = prevPos;
-				this.transform.rotation = prevRot;
-			} else {
+			// 既に別のオブジェクトがあった
+			this.transform.localPosition = prevPos;
+			this.transform.rotation = prevRot;
+			if(this.transform.localPosition.y >= 8.1f) {
 				RemoveObject();
 			}
 		}
@@ -153,7 +149,7 @@ public class MovableObject : PitagoraObject {
     		}         
         }
     }
-/*
+
 	void OnMouseDown() {
 		if (this.IsChild) return;
 
@@ -176,7 +172,7 @@ public class MovableObject : PitagoraObject {
 		if (this.IsChild) return;
 		
 		this.IsHold = false;
-	}*/
+	}
 
 	void OnTouchDown() {
     	Debug.Log("OnTouchDown");
@@ -232,21 +228,15 @@ public class MovableObject : PitagoraObject {
 		Vector3 diff = new Vector3(this.transform.localPosition.x % GLID_SIZE, this.transform.localPosition.y % GLID_SIZE, 0);
 		Vector3 glidPos = new Vector3(this.transform.localPosition.x - diff.x, this.transform.localPosition.y - diff.y, 0);
 
-		if (diff.x > GLID_SIZE / 2)
-		{
+		if (diff.x > GLID_SIZE / 2)　{
 			glidPos.x += GLID_SIZE;
-		}
-		else if (diff.x < -(GLID_SIZE / 2))
-		{
+		}　else if (diff.x < -(GLID_SIZE / 2))　{
 			glidPos.x -= GLID_SIZE;
 		}
 
-		if (diff.y > GLID_SIZE / 2)
-		{
+		if (diff.y > GLID_SIZE / 2)　{
 			glidPos.y += GLID_SIZE;
-		}
-		else if (diff.y < -(GLID_SIZE / 2))
-		{
+		} else if (diff.y < -(GLID_SIZE / 2)) {
 			glidPos.y -= GLID_SIZE;
 		}
 
