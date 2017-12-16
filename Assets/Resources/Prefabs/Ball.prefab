@@ -62,7 +62,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 2
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!58 &58879682230359456
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -89,10 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5f9c616e0984863b1e62312d9b0eec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: {x: 0, y: 0, z: 0, w: 0}
-  IsStatic: 0
-  IsInstalled: 0
   IsMotion: 1
+  IsChild: 0
 --- !u!212 &212019347238180554
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -58,7 +58,9 @@ public class MovableObject : PitagoraObject {
     			}
     		}
     	} else {
-    		// OnMouseDown();
+#if UNITY_STANDALONE_OSX
+    		OnMouseDown();
+#endif
     	}
 
 		var rigidbody = this.GetComponent<Rigidbody2D>();
@@ -95,7 +97,7 @@ public class MovableObject : PitagoraObject {
 			this.transform.localPosition = prevPos;
 			this.transform.rotation = prevRot;
 			if(this.transform.localPosition.y >= 8.1f) {
-				RemoveObject();
+				// RemoveObject();
 			}
 		}
 	}
@@ -149,7 +151,8 @@ public class MovableObject : PitagoraObject {
     		}         
         }
     }
-/*
+
+#if UNITY_STANDALONE_OSX
 	void OnMouseDown() {
 		if (this.IsChild) return;
 
@@ -173,7 +176,8 @@ public class MovableObject : PitagoraObject {
 		
 		this.IsHold = false;
 	}
-*/
+#endif
+
 	void OnTouchDown() {
     	Debug.Log("OnTouchDown");
 		this.IsHold = true;
