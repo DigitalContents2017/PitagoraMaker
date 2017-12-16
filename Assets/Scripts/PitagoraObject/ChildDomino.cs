@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-class ChildDomino : MonoBehaviour {
+class ChildDomino : PitagoraObject {
 	Vector3 prevPos;
 	Quaternion prevRotation;
 
