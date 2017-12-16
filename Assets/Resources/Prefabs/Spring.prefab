@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4113028734513404}
   - component: {fileID: 212443624963190742}
   - component: {fileID: 61172700033900288}
-  - component: {fileID: 114477650772246292}
+  - component: {fileID: 114344044668497880}
   m_Layer: 0
   m_Name: Spring
   m_TagString: Untagged
@@ -67,7 +67,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114477650772246292
+--- !u!114 &114344044668497880
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -75,9 +75,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1592492118918358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2763986660bfb48bd91e93a1787b6ad8, type: 3}
+  m_Script: {fileID: 11500000, guid: fc5343600475b44118403dbc32123cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsMotion: 0
+  IsChild: 0
 --- !u!212 &212443624963190742
 SpriteRenderer:
   m_ObjectHideFlags: 1
