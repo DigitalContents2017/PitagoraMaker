@@ -4,15 +4,21 @@ using UnityEngine;
 public class PitagoraObject : MonoBehaviour {
 
 	public Quaternion rotation;
-	public bool IsStatic = false;
-	public bool IsInstalled = false;
-	public bool IsMotion = false;
-	public bool IsChild = false;
 
 	protected Vector3 prevPos;
 
 	bool _isTouch = false;
 	int touchNo = -1;
+
+	// 静的なオブジェクト
+	public bool IsStatic = false;
+
+	protected bool IsInstalled = false;
+	
+	// ゴールに影響を与えるオブジェクト
+	public bool IsMotion = false;
+	
+	public bool IsChild = false;
 
 	bool isHold = false;
 	public bool IsHold {
@@ -53,12 +59,14 @@ public class PitagoraObject : MonoBehaviour {
     			}
     		}
     	} else {
-    		//OnMouseDown();
+    		// OnMouseDown();
     	}
+
+    	OnStart();
 	}
 
 	void Update() {
-		UpdateTouch();
+		if(!this.IsChild) UpdateTouch();
 
 		if(this.IsHold && touchNo == -1) {
 			Vector3 screenPos = Input.mousePosition;
@@ -67,9 +75,12 @@ public class PitagoraObject : MonoBehaviour {
 			this.transform.position = worldPos;
 		}
 
-		if(!this.IsHold && this.transform.localPosition.y >= 8.1f && !this.IsChild) {
+		if(this.IsInstalled && this.transform.localPosition.y >= 8.1f && !this.IsMotion) {
+			Debug.Log("ismotion :"  + this.IsMotion);
 			Destroy(this.gameObject);
 		}
+
+		OnUpdate();
 	}
 
 	protected virtual void OnObjectPressed() {
@@ -85,18 +96,22 @@ public class PitagoraObject : MonoBehaviour {
 	protected virtual void OnObjectReleased() {
 		Debug.Log("PitagoraObject:OnOnjectReleased()");
 		if (this.transform.localPosition.y >= 8.1f) {
-			Destroy(gameObject);
+			// Destroy(gameObject);
+			Debug.Log("bbb");
 			return;
 		}
 	}
-
 /*
 	void OnMouseDown() {
+		if (this.IsChild) return;
+
 		Debug.Log("OnMouseDown");
 		this.IsHold = true;
 	}
 
 	void OnMouseDrag() {
+		if (this.IsChild) return;
+		
 		if(this.IsHold) {
 			Vector3 screenPos = Input.mousePosition;
 			Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
@@ -106,6 +121,8 @@ public class PitagoraObject : MonoBehaviour {
 	}
 
 	void OnMouseUp() {
+		if (this.IsChild) return;
+		
 		this.IsHold = false;
 	}*/
 
@@ -157,7 +174,8 @@ public class PitagoraObject : MonoBehaviour {
         }
     }
 
-	public virtual void OnStart() {}
+	protected virtual void OnStart() {}
+	protected virtual void OnUpdate() {}
 
 	public virtual void StartSimulation() {}
 	public virtual void EndSimulation() {}

@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
  
-class ChildBlock : PitagoraObject
-{
+class ChildBlock : PitagoraObject {
  Quaternion prevRotation;
  Collider2D ObjectCollider;
  public bool isFreeze = false;

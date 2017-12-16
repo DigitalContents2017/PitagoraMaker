@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4279856393223736}
   - component: {fileID: 114580165297662134}
+  - component: {fileID: 114802350396177258}
   m_Layer: 0
   m_Name: Domino
   m_TagString: Untagged
@@ -36,9 +37,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4733904167006704}
   - component: {fileID: 212958705410736554}
-  - component: {fileID: 114696058131316230}
   - component: {fileID: 61426022439929494}
+  - component: {fileID: 114696058131316230}
   - component: {fileID: 50563985439762328}
+  - component: {fileID: 114320968657975912}
   m_Layer: 0
   m_Name: LeftDomino
   m_TagString: Untagged
@@ -58,6 +60,7 @@ GameObject:
   - component: {fileID: 61036492813727914}
   - component: {fileID: 114443896711725200}
   - component: {fileID: 50343530186741088}
+  - component: {fileID: 114124677449509376}
   m_Layer: 0
   m_Name: RightDomino
   m_TagString: Untagged
@@ -196,7 +199,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.22, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114443896711725200
+--- !u!114 &114124677449509376
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -204,30 +207,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1689820115393628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d2bcc21079cd4ff381f908f09aab5e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1eaea9730fab443c49bcba8c54540f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: {x: 0, y: 0, z: 0, w: 0}
-  IsStatic: 0
-  IsInstalled: 0
-  IsMotion: 0
-  isFreeze: 0
---- !u!114 &114580165297662134
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1242732709581418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2763986660bfb48bd91e93a1787b6ad8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotation: {x: 0, y: 0, z: 0, w: 0}
-  IsStatic: 0
-  IsInstalled: 0
-  IsMotion: 1
---- !u!114 &114696058131316230
+--- !u!114 &114320968657975912
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -235,14 +218,71 @@ MonoBehaviour:
   m_GameObject: {fileID: 1428372759084666}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eaea9730fab443c49bcba8c54540f77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114443896711725200
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1689820115393628}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d2bcc21079cd4ff381f908f09aab5e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotation: {x: 0, y: 0, z: 0, w: 0}
   IsStatic: 0
-  IsInstalled: 0
   IsMotion: 0
+  IsChild: 0
   isFreeze: 0
+--- !u!114 &114580165297662134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1242732709581418}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2763986660bfb48bd91e93a1787b6ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  IsStatic: 0
+  IsMotion: 1
+  IsChild: 0
+--- !u!114 &114696058131316230
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1428372759084666}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d2bcc21079cd4ff381f908f09aab5e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  IsStatic: 0
+  IsMotion: 0
+  IsChild: 0
+  isFreeze: 0
+--- !u!114 &114802350396177258
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1242732709581418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc04f6e8b533c45bc89802af6ce2f58d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  IsStatic: 0
+  IsMotion: 1
+  IsChild: 0
 --- !u!212 &212254161158443006
 SpriteRenderer:
   m_ObjectHideFlags: 1

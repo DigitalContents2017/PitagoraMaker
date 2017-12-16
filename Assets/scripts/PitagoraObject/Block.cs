@@ -9,8 +9,8 @@ class Block : PitagoraObject {
 	Collider2D objectCollider;
 	BoxCollider2D touchCollider;
 
-	public override void OnStart() {
-		Debug.Log("a");
+	protected override void OnStart() {
+		base.OnStart();
 
 		objectCollider = this.GetComponent<Collider2D>();
 		if (objectCollider != null) {
@@ -18,8 +18,6 @@ class Block : PitagoraObject {
 		}
 		touchCollider = gameObject.AddComponent<BoxCollider2D>();
 		touchCollider.size = new Vector2(1, 1);
-
-		Debug.Log("b");
 	}
 
 	public override void StartSimulation() {
@@ -55,7 +53,6 @@ class Block : PitagoraObject {
 	protected override void OnObjectReleased() {
 		base.OnObjectReleased();
 
-
 		if (!Manager.simulationManager.isSimulating) {
 			if (IsTrashed()) {
 				RemoveObject();
@@ -75,20 +72,21 @@ class Block : PitagoraObject {
 					this.transform.localPosition = prevPos;
 					this.transform.rotation = rotation;
 				} else {
-					Destroy(gameObject);
+					RemoveObject();
 				}
 			}
 		}
 	}
 
 	public override void RemoveObject() {
+		Debug.Log("Block:RemoveObject()");
 		StageManager.RemoveObject(prevPos);
 		Destroy(gameObject);
 	}
 
 	Vector3 GetFitGlidPos() {
-		Vector3 diff = new Vector3(transform.position.x % GLID_SIZE, transform.position.y % GLID_SIZE, 0);
-		Vector3 glidPos = new Vector3(transform.position.x - diff.x, transform.position.y - diff.y, 0);
+		Vector3 diff = new Vector3(this.transform.localPosition.x % GLID_SIZE, this.transform.localPosition.y % GLID_SIZE, 0);
+		Vector3 glidPos = new Vector3(this.transform.localPosition.x - diff.x, this.transform.localPosition.y - diff.y, 0);
 
 		if (diff.x > GLID_SIZE / 2)
 		{
@@ -109,7 +107,7 @@ class Block : PitagoraObject {
 		}
 
 		return glidPos;
-		}
+	}
 
 		bool IsTrashed() {
 			GameObject trash = GameObject.Find("Trash");
