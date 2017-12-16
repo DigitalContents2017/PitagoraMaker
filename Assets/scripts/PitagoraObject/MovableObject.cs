@@ -74,14 +74,14 @@ public class MovableObject : PitagoraObject {
 
 	protected virtual void OnObjectReleased() {
 		Debug.Log("PitagoraObject:OnOnjectReleased()");
-		if (this.transform.localPosition.y >= 8.1f) {
-			// Destroy(gameObject);
-			Debug.Log("bbb");
-			return;
-		}
 
 		if (IsTrashed()) {
 			RemoveObject();
+			return;
+		}
+
+		if (this.transform.localPosition.y >= 8.1f) {
+			// Destroy(gameObject);
 			return;
 		}
 
@@ -252,17 +252,9 @@ public class MovableObject : PitagoraObject {
 		return glidPos;
 	}
 
-		bool IsTrashed() {
-			GameObject trash = GameObject.Find("Trash");
-			Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-			Vector3 trashScreenPos = Camera.main.WorldToScreenPoint(trash.transform.position);
-			Vector3 mouseScreenPos = Input.mousePosition;
-			float width = trash.GetComponent<RectTransform>().rect.width * canvas.scaleFactor;
-			float height = trash.GetComponent<RectTransform>().rect.height * canvas.scaleFactor;
-			if(Math.Abs(trashScreenPos.x - mouseScreenPos.x) < width / 2 &&
-				Math.Abs(trashScreenPos.y - mouseScreenPos.y) < height / 2) {
-			return true;
-		}
-		return false;
+	bool IsTrashed() {
+		var pos = this.transform.localPosition;
+		if(14.0f <= pos.x && pos.x <= 17.0f && -10.0f <= pos.y && pos.y <= -6.0f) return true;
+		else return false;
 	}
 }
