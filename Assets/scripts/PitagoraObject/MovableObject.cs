@@ -38,6 +38,7 @@ public class MovableObject : PitagoraObject {
 
 		touchCollider = gameObject.AddComponent<BoxCollider2D>();
 		touchCollider.size = new Vector2(1, 1);
+
 		// タッチ用
 		if (Input.touchCount > 0) {
 	    	// タッチされている指の数だけ処理
@@ -57,7 +58,7 @@ public class MovableObject : PitagoraObject {
     			}
     		}
     	} else {
-    		OnMouseDown();
+    		// OnMouseDown();
     	}
 
 		var rigidbody = this.GetComponent<Rigidbody2D>();
@@ -81,7 +82,7 @@ public class MovableObject : PitagoraObject {
 		}
 
 		if (this.transform.localPosition.y >= 8.1f) {
-			// Destroy(gameObject);
+			RemoveObject();
 			return;
 		}
 
@@ -152,7 +153,7 @@ public class MovableObject : PitagoraObject {
     		}         
         }
     }
-
+/*
 	void OnMouseDown() {
 		if (this.IsChild) return;
 
@@ -175,7 +176,7 @@ public class MovableObject : PitagoraObject {
 		if (this.IsChild) return;
 		
 		this.IsHold = false;
-	}
+	}*/
 
 	void OnTouchDown() {
     	Debug.Log("OnTouchDown");
