@@ -14,19 +14,17 @@ public class MovableObject : PitagoraObject {
 
 	bool isHold = false;
 	public bool IsHold {
-		get {
-			if(IsStatic) return false;
-			else return isHold;
-		} set {
-			if(!IsStatic) {
-				if(!isHold && value) {
-					OnObjectPressed();
-				} else if(isHold && !value) {
-					OnObjectReleased();
-				}
+		get {　return isHold; }
+		set {
+			if (Manager.simulationManager.IsSimulating) return;
 
-				isHold = value;
+			if(!isHold && value) {
+				OnObjectPressed();
+			} else if(isHold && !value) {
+				OnObjectReleased();
 			}
+
+			isHold = value;
 		}
 	}
 
@@ -40,15 +38,14 @@ public class MovableObject : PitagoraObject {
 
 		touchCollider = gameObject.AddComponent<BoxCollider2D>();
 		touchCollider.size = new Vector2(1, 1);
-
 		// タッチ用
 		if (Input.touchCount > 0) {
 	    	// タッチされている指の数だけ処理
 	    	for (int i = 0; i < Input.touchCount; i++) {
 	    		var touch = Input.GetTouch(i);
 	    		//タッチした位置からRayを飛ばす
-	    		Vector2 worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
-	    		RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+	    		var worldPoint = Camera.main.ScreenToWorldPoint(touch.position);
+	    		var hit = Physics2D.Raycast(worldPoint, Vector2.zero);
 
 	    		if (hit) {
     				//Rayを飛ばしてあたったオブジェクトが自分自身だったら
@@ -62,6 +59,9 @@ public class MovableObject : PitagoraObject {
     	} else {
     		OnMouseDown();
     	}
+
+		var rigidbody = this.GetComponent<Rigidbody2D>();
+		if(rigidbody != null) rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
 	}
 
 
@@ -70,9 +70,6 @@ public class MovableObject : PitagoraObject {
 
 		prevPos = this.transform.localPosition;
 		prevRot = this.transform.rotation;
-
-		var rigidbody = GetComponent<Rigidbody2D>();
-		if(rigidbody != null) rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
 	}
 
 	protected virtual void OnObjectReleased() {
@@ -83,27 +80,25 @@ public class MovableObject : PitagoraObject {
 			return;
 		}
 
-		if (!Manager.simulationManager.isSimulating) {
-			if (IsTrashed()) {
-				RemoveObject();
-				return;
-			}
+		if (IsTrashed()) {
+			RemoveObject();
+			return;
+		}
 
-			Vector3 glidPos = GetFitGlidPos();
-			var result = StageManager.SetObject(glidPos);
+		Vector3 glidPos = GetFitGlidPos();
+		var result = StageManager.SetObject(glidPos);
 
-			if (result) {
-				StageManager.RemoveObject(prevPos);
-				transform.position = glidPos;
-				prevPos = glidPos;
-				this.IsInstalled = true;
+		if (result) {
+			StageManager.RemoveObject(prevPos);
+			transform.position = glidPos;
+			prevPos = glidPos;
+			this.IsInstalled = true;
+		} else {
+			if(this.IsInstalled) {
+				this.transform.localPosition = prevPos;
+				this.transform.rotation = prevRot;
 			} else {
-				if(this.IsInstalled) {
-					this.transform.localPosition = prevPos;
-					this.transform.rotation = prevRot;
-				} else {
-					RemoveObject();
-				}
+				RemoveObject();
 			}
 		}
 	}
