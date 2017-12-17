@@ -97,7 +97,7 @@ public class MovableObject : PitagoraObject {
 			this.transform.localPosition = prevPos;
 			this.transform.rotation = prevRot;
 			if(this.transform.localPosition.y >= 8.1f) {
-				// RemoveObject();
+				RemoveObject();
 			}
 		}
 	}
